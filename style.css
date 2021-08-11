@@ -11,19 +11,21 @@ body {
   font-size: 18px;
   padding: 0;
   margin: 0;
+  height: auto;
 }
 .header {
   display: flex;
   flex-direction: column;
   padding: 20px;
 }
-#logo {
+
+img#logo {
   width: 156px;
-  padding: 25px 0 0 20px;
+  padding: 15px 0 0 0px;
   color: #901c1c;
 }
 header ul {
-  padding-top: 35px;
+  padding-top: 28px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -156,8 +158,46 @@ section ul {
     top: 62px;
     width: 156px;
     position: relative;
-    padding: 25px 0 0 20px;
+    padding: 25px 0 0 0px;
     color: #901c1c;
+  }
+}
+
+@media screen and (min-width: 1030px) {
+  img#logo {
+    top: 70px;
+    width: 220px;
+    position: relative;
+    padding: 25px 0 0 0px;
+    color: #901c1c;
+  }
+  h1 {
+    font-size: 21px;
+    font-weight: 600;
+    position: absolute;
+    top: 134px;
+    right: 20px;
+    color: #901c1c;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  img#logo {
+    top: 75px;
+    width: 280px;
+    position: relative;
+    padding: 25px 0 0 0px;
+    color: #901c1c;
+  }
+  h1 {
+    font-size: 25px;
+    font-weight: 600;
+    position: absolute;
+    top: 146px;
+    right: 20px;
+    color: #901c1c;
+    font-family: Arial, Helvetica, sans-serif;
   }
 }
 
@@ -183,4 +223,208 @@ body {
     margin: 10px 80px 10px 80px;
     background-color: #fafafa;
   }
+}
+
+/* formulaire */
+
+.modal-body {
+  width: 375px;
+  height: 812px;
+  padding: 110px 0 0 15px;
+  border-radius: 5px;
+  /*Blend:Pass through;*/
+  position: relative;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #db8876;
+}
+
+.textcontrol {
+  margin-top: 5px;
+  border: none;
+  width: 338px;
+  height: 52px;
+  top: 177px;
+  left: 17px;
+  border-radius: 5px;
+
+  right: 5.23%;
+  bottom: 66.11%;
+
+  background: #ffffff;
+  border-radius: 5px;
+  /*Blend :Pass through;*/
+}
+textarea#message.textcontrol {
+  width: 338px;
+  height: 184px;
+  top: 492px;
+  left: 17px;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.contactez-moi {
+  position: absolute;
+  left: 4.53%;
+  right: 28%;
+  top: 2.46%;
+  bottom: 91.75%;
+
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 47px;
+  /* identical to box height */
+
+  color: #000000;
+}
+.hautformulaire {
+  font-family: DM Sans;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 46, 87px;
+}
+.btn-submit {
+  width: 170px;
+  height: 35px;
+  top: 702px;
+  left: 97px;
+  border-radius: 5px;
+  color: white;
+  position: absolute;
+
+  right: 28.8%;
+
+  bottom: 9.24%;
+  border: none;
+  /*display: flex;*/
+  cursor: pointer;
+  background: #911c1c;
+}
+p.namephotograph {
+  position: absolute;
+  left: 4.53%;
+  right: 28%;
+  top: 7.46%;
+  bottom: 91.75%;
+
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 47px;
+  /* identical to box height */
+
+  color: #000000;
+}
+/*
+#closebtn {
+  position: absolute;
+  left: 20.83%;
+  right: 20.83%;
+  top: 20.83%;
+  bottom: 20.83%;
+
+  background: #ffffff;
+}
+*/
+span#closebtn {
+  position: absolute;
+  color: white;
+  opacity: 1;
+  cursor: pointer;
+  z-index: 1;
+  /* right: -43px; */
+  left: 323px;
+  /* font-size: 13px; */
+  top: 17px;
+}
+/*
+  position: absolute;
+}*/
+
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 24px;
+  width: 3px;
+  background-color: #fff;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+.content {
+  margin: 5% auto;
+
+  width: 100%;
+  position: relative;
+}
+.bground {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(82, 82, 82, 0.4);
+}
+input,
+textarea {
+  font-size: 20px;
+  padding-left: 10px;
+  color: black;
+}
+#submitMessage {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.btn-validation {
+  width: 40%;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #901c1c;
+  color: white;
+}
+
+.submitMessage {
+  margin: auto;
+
+  width: 75%;
+  padding: 120px 0 30px 0;
+  text-align: center;
+  font-size: 30px;
+}
+
+/* PAGE PERSONNELLE */
+
+#list_personnalphotographcontainer {
+  width: 1200px;
+  height: 900px;
+}
+/* ????? */
+#text {
+  opacity: 0;
+  color: transparent;
+}
+
+.articlephotograph {
+  padding-bottom: 50px;
+  margin-bottom: 50px;
 }

@@ -1,44 +1,118 @@
-<div id="pageMimiKeel">
-    <header class="headerMimiKeel">
-        <div><img src="Logo.png.png" id="logo" /> </div>
-    </header>
-    <main class="mainMimiKeel">
+<!---->
+<div class=pagePhotograph>
+    <div id="pageMimiKeel">
+        <a href="http://127.0.0.1:52645/photograph?photographId=243 ">
+            <header class="headerMimiKeel">
+                <div><img src="Logo.png" id="logo" /> </div>
+            </header>
+            <main class="mainMimiKeel">
 
-        <section class="sectionMimiKeel">
-            <div id="list_personnalphotographcontainer">
+                <section class="sectionMimiKeel">
+                    <div id="list_personnalphotographcontainer">
 
 
-                <div>
-                    <h2 class="name">${name}</h2>
-                    <template class="id">${id}</template>
-                    <div class="city_country">${city}, ${country}</div>
-                    <div class="tagline">${tagline}</div>
-                    <ul class="container_tags">
-                        <li><a href="index.html" class="tags">#${tags}</a></li>
-                    </ul>
+                        <div>
+                            <h2 class="name">${name}</h2>
+                            <template class="id">${id}</template>
+                            <div class="city_country">${city}, ${country}</div>
+                            <div class="tagline">${tagline}</div>
+                            <ul class="container_tags">
+                                <li><a href="index.html" class="tags">#${tags}</a></li>
+                            </ul>
+                        </div>
+                        <!--formulaire-->
+                        <!--formulaire-->
+                        <button class="modal-btn">
+                            Contact
+                        </button>
+                        <div> <button class="modal-btn">${contact}</button> </div>
+
+                        <div class="bground">
+                            <div class="content">
+                                <span class="close" id="closebtn"></span>
+                                <div class="modal-body">
+                                    <form id="inscription" novalidate name="reserve">
+                                        <div class="hautformulaire">
+                                            <p class="contactez-moi">Contactez-moi</p>
+                                            <p class="namephotograph">$name</p>
+
+                                        </div>
+                                        </p>
+
+                                        <br />
+
+                                        <!-- 1ere data : prénom-->
+                                        <div class="formData">
+                                            <label for="firstname">Prénom</label><br>
+                                            <input class="textcontrol" type="text" id="firstname" name="firstname" />
+                                            <br>
+                                            <div id="texterrorfirstname"></div>
+                                        </div>
+                                        <br />
+                                        <!--2eme data : nom-->
+                                        <div class="formData">
+                                            <label for="lastname">Nom</label><br>
+                                            <input class="textcontrol" type="text" id="last" name="last" /><br>
+                                            <div id="texterrorlastname"></div>
+                                        </div>
+                                        <br />
+                                        <!--3eme data : email-->
+
+                                        <div class="formData">
+                                            <label for="email">E-mail</label><br>
+                                            <input class="textcontrol" id="email" name="email" /><br>
+                                            <div id="texterroremail"></div>
+                                        </div>
+                                        <br />
+                                        <!--4eme date : message-->
+                                        <div class="formData">
+                                            <label for="message">Votre message</label><br>
+                                            <input class="textcontrol" type="text" id="message" name="message" /><br>
+                                            <div id="texterrormessage"></div>
+                                        </div>
+                                        <br />
+                                        <!--bouton transmission-->
+                                        <input class="btn-submit" type="submit" id="submit" name="submit"
+                                            value="Envoyer" />
+                                    </form>
+                                    <!--message envoyer en dehors de form-->
+                                    <div id="submitMessage" style="display:none">
+                                        <p class="submitMessage">Merci ! <br>Votre réservation a bien été reçue.</p>
+                                        <button class="btn-validation" id="btn-validation" type="button">Fermer</button>
+                                    </div>
+                                    <!--pas nécessaire ce message apparemment-->
+
+
+                                    <!--fin-->
+
+
+                                    <!-- <div> <a href="" class="portrait"><img src="images/${portrait}" /></a>
                 </div>
-                <div> <button class="contact">${contact}</button> </div>
-                <div> <a href="" class="portrait"><img src="images/${portrait}" /></a>
-                </div>
+
+            -->
+
+                                </div>
 
 
 
-            </div>
-
-        </section>
-        <article class="articleMimiKeel">
 
 
-        </article>
 
-    </main>
+                </section>
+                <article class="articleMimiKeel">
+
+
+                </article>
+
+            </main>
+        </a>
+    </div>
+
 </div>
-
-
 <!--    page Ellie Rose Wilkens-->
 <div id="pageEllieRoseWilkens">
     <header class="headerEllieRoseWilkens">
-        <div><img src="Logo.png.png" id="logo" /> </div>
+        <div><img src="Logo.png" id="logo" /> </div>
     </header>
     <main class="mainEllieRoseWilkens">
 
@@ -58,7 +132,7 @@
 <!--Tracy Galindo -->
 <div id="pageTracyGalindo">
     <header class="headerTracyGalindo">
-        <div><img src="Logo.png.png" id="logo" /> </div>
+        <div><img src="Logo.png" id="logo" /> </div>
     </header>
     <main class="mainTracyGalindo">
 
@@ -79,7 +153,7 @@
 <!--Nabeel Bradford -->
 <div id="pageNabeelBradford">
     <header class="headerNabeelBradford">
-        <div><img src="Logo.png.png" id="logo" /> </div>
+        <div><img src="Logo.png" id="logo" /> </div>
     </header>
     <main class="mainNabeelBradford">
 
@@ -100,7 +174,7 @@
 <!--Rhode Dubois -->
 <div id="pageRhodeDubois">
     <header class="headerRhodeDubois">
-        <div><img src="Logo.png.png" id="logo" /> </div>
+        <div><img src="Logo.png" id="logo" /> </div>
     </header>
     <main class="mainRhodeDubois">
 
@@ -120,7 +194,7 @@
 <!--Marcel Nikolic -->
 <div id="pageMarcelNikolic">
     <header class="headerMarcelNikolic">
-        <div><img src="Logo.png.png" id="logo" /> </div>
+        <div><img src="Logo.png" id="logo" /> </div>
     </header>
     <main class="mainMarcelNikolic">
 
