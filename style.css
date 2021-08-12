@@ -102,6 +102,8 @@ H2 {
 section ul {
   padding: 10px 0 15px 0;
   list-style-type: none;
+  display: flex;
+  justify-content: center;
 }
 
 #list_container {
@@ -419,12 +421,18 @@ textarea {
   height: 900px;
 }
 /* ????? */
-#text {
-  opacity: 0;
-  color: transparent;
+#logophotograph {
+  width: 156px;
+  padding: 15px 0 0 0px;
+  color: #901c1c;
 }
 
 .articlephotograph {
   padding-bottom: 50px;
   margin-bottom: 50px;
+}
+
+#list_photographcontainer {
+  display: flex;
+  background-color: orange;
 }
