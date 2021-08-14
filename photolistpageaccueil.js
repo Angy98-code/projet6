@@ -84,7 +84,7 @@ const getListItemHtml = (
   tags
 ) => `
 <div id="list_container1">
-<a href="photograph.html?photographId=${id}" id="list_container" class="portrait"><img src="images/${portrait}"/></a>        
+<a href="photographpersopage.html?photographId=${id}" id="list_container" class="portrait"><img src="images/${portrait}"/></a>        
 <h2 class="name">${name}</h2>
     <template class="id">${id}</template>
     <div class="city_country">${city}, ${country}</div>
