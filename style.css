@@ -19,9 +19,9 @@ body {
   padding: 20px;
 }
 
-img#logo {
-  width: 156px;
-  padding: 15px 0 0 0px;
+#logo {
+  width: 190px;
+  padding: 0;
   color: #901c1c;
 }
 header ul {
@@ -58,7 +58,7 @@ H1 {
   font-size: 16px;
   font-weight: 300;
   position: absolute;
-  top: 46px;
+  top: 35px;
   right: 20px;
   color: #901c1c;
   font-family: Arial, Helvetica, sans-serif;
@@ -92,14 +92,15 @@ H2 {
 }
 .tagline {
   padding: 5px 0 6px 0;
-  font-size: 12px;
-  font-weight: 550;
+  font-size: 14px;
+
+  color: rgba(0, 0, 0, 0.5);
 }
 .price {
   font-size: 11px;
   font-weight: 100;
 }
-section ul {
+ul.container_tags {
   padding: 10px 0 15px 0;
   list-style-type: none;
   display: flex;
@@ -147,26 +148,13 @@ section ul {
   main {
     padding-top: 80px;
   }
-  H1 {
-    font-size: 17px;
-    font-weight: 600;
-    position: absolute;
-    top: 109px;
-    right: 20px;
-    color: #901c1c;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  #logo {
-    top: 62px;
-    width: 156px;
-    position: relative;
-    padding: 25px 0 0 0px;
-    color: #901c1c;
+  .mainphotograph {
+    padding-top: 0;
   }
 }
 
 @media screen and (min-width: 1030px) {
-  img#logo {
+  #logo {
     top: 70px;
     width: 220px;
     position: relative;
@@ -177,39 +165,28 @@ section ul {
     font-size: 21px;
     font-weight: 600;
     position: absolute;
-    top: 134px;
+    top: 45px;
     right: 20px;
     color: #901c1c;
     font-family: Arial, Helvetica, sans-serif;
   }
-}
-
-@media screen and (min-width: 1050px) {
-  img#logo {
-    top: 75px;
-    width: 280px;
-    position: relative;
-    padding: 25px 0 0 0px;
-    color: #901c1c;
-  }
-  h1 {
-    font-size: 25px;
-    font-weight: 600;
-    position: absolute;
-    top: 146px;
-    right: 20px;
-    color: #901c1c;
-    font-family: Arial, Helvetica, sans-serif;
+  header {
+    margin-top: -90px;
   }
 }
 
 /* SECTION PHOTOGRAPHES */
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+}
+
+.headerphotograph {
+  margin-top: 10px;
 }
 
 #list_personnalphotographcontainer {
@@ -220,18 +197,75 @@ body {
   min-width: 100%;
   min-height: 100%;
 }
-@media screen and (min-width: 961px) {
+.taglinephotograph {
+  margin-top: 15px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* !!!*/
+
+@media screen and (min-width: 669px) {
   .sectionPhotograph {
     margin: 10px 80px 10px 80px;
     background-color: #fafafa;
   }
+  .taglinephotograph {
+    padding: 0px 0 6px 0;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.8);
+  }
 }
 
 /* formulaire */
+/* position bouton iphone */
+
+.formulaire {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 380px;
+}
+button.modal-btn {
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+
+  font-size: 16px;
+  background-color: #901c1c;
+  color: white;
+}
+
+@media screen and (min-width: 330px) and (max-width: 385px) {
+  .container_photographtags {
+    padding-top: 60px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    list-style: none;
+  }
+}
+
+@media screen and (min-width: 669px) {
+  .formulaire {
+    display: flex;
+    justify-content: center;
+    margin: -186px 0 0 65px;
+  }
+  button.modal-btn {
+    height: 43px;
+    width: 130px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+}
 
 .modal-body {
   width: 375px;
-  height: 812px;
+  height: 835px;
   padding: 110px 0 0 15px;
   border-radius: 5px;
   /*Blend:Pass through;*/
@@ -252,7 +286,7 @@ body {
   top: 177px;
   left: 17px;
   border-radius: 5px;
-
+  display: flex;
   right: 5.23%;
   bottom: 66.11%;
 
@@ -260,9 +294,17 @@ body {
   border-radius: 5px;
   /*Blend :Pass through;*/
 }
-textarea#message.textcontrol {
+
+label {
+  display: flex;
+}
+
+textarea.textcontrol {
+  font-size: 20px;
+  padding-left: 10px;
+  color: black;
   width: 338px;
-  height: 184px;
+  height: 165px;
   top: 492px;
   left: 17px;
   border-radius: 5px;
@@ -295,7 +337,7 @@ textarea#message.textcontrol {
 .btn-submit {
   width: 170px;
   height: 35px;
-  top: 702px;
+  top: 750px;
   left: 97px;
   border-radius: 5px;
   color: white;
@@ -383,8 +425,7 @@ span#closebtn {
   overflow: auto;
   background-color: rgba(82, 82, 82, 0.4);
 }
-input,
-textarea {
+input {
   font-size: 20px;
   padding-left: 10px;
   color: black;
@@ -416,14 +457,42 @@ textarea {
 
 /* PAGE PERSONNELLE */
 
-#list_personnalphotographcontainer {
-  width: 1200px;
-  height: 900px;
+.taillephotographiphone {
+  align-self: flex-end;
+  position: absolute;
 }
-/* ????? */
-#logophotograph {
-  width: 156px;
-  padding: 15px 0 0 0px;
+
+#portraitphotograph {
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+}
+
+#pagePhotograph {
+  margin: 20px 20px 0 20px;
+}
+a.tagsphotograph {
+  margin-right: 5px;
+}
+ul.container_photographtags {
+  padding-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+}
+
+.h2photograph {
+  padding: 10px 0 5px 0;
+  color: #d3573c;
+  font-size: 40px;
+  font-weight: 200;
+}
+img#logophotograph {
+  width: 250px;
+  padding: 15px 0 0 0;
+  margin-left: -45px;
   color: #901c1c;
 }
 
@@ -432,7 +501,257 @@ textarea {
   margin-bottom: 50px;
 }
 
-#list_photographcontainer {
+div#list_photographcontainer {
   display: flex;
-  background-color: orange;
+  flex-direction: column;
+
+  /* a enlever plus tard*/
+}
+
+.tagsphotograph {
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  padding: 5px 8px 5px 8px;
+  text-decoration: none;
+  border-radius: 14px;
+  border: solid 1px #9b9b9b;
+  color: #901c1c;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#list_photographcontainer {
+  text-align: left;
+  position: relative;
+}
+
+/* page personnel mediaqueries */
+@media screen and (min-width: 669px) {
+  #pagePhotograph {
+    margin: 30px 40px 0 40px;
+  }
+  #list_photographcontainer {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-top: 20px;
+    padding: 5px 20px 20px 20px;
+    /* a enlever plus tard*/
+  }
+  #list_photographcontainer {
+    background-color: #fafafa;
+    margin-bottom: 10px;
+    /* a enlever plus tard*/
+  }
+
+  .taillephotographiphone {
+    align-self: flex-end;
+    top: 19%;
+  }
+  #portraitphotograph {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+}
+
+/*
+//////////////////
+*/
+
+/* SELECT BOUTON TRIER PAR*/
+
+select {
+  width: 150px;
+}
+.custom_select {
+  font-family: arial;
+  padding-left: 2px;
+  font-size: 16px;
+  color: white;
+  width: 125px;
+}
+.custom_select select {
+  display: none;
+}
+/* 1er bouton */
+.newselecttrier {
+  background-color: #901c1c;
+  border: none;
+  padding: 15px;
+
+  font-weight: lighter;
+  color: white;
+}
+/*fleche dans trier par */
+/*
+.newselecttrier::after {
+  content: "";
+
+  top: 14px;
+  right: 5px;
+  border: 6px solid;
+  border-color: #fff transparent transparent transparent;
+  color: white;
+  height: 0;
+}
+*/
+.newselecttrier::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+
+.triertext {
+  color: black;
+  text-align: left;
+  font-weight: bold;
+  padding-top: 15px;
+  font-size: 16px;
+  padding-right: 15px;
+}
+.select-items div {
+  background-color: #901c1c;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 15px;
+}
+.select-items div:hover {
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+}
+
+.select-hide {
+  display: none;
+}
+
+.trierpar {
+  height: 200px;
+  position: relative;
+  display: flex;
+  top: 1700px;
+}
+
+.newselecttrier.active::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f106";
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+/*
+flèche haut sur option !!!!
+.select-items.active::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f106";
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+*/
+/*
+@media screen and (min-width: 768px) {
+  div.custm_select {
+    display: block;
+  }
+}
+*/
+/* GALERIE PHOTOS */
+
+.articlephotograph {
+  margin: 0;
+  padding: 0;
+  margin-top: -580px;
+}
+#galeriephotos {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  row-gap: 30px;
+  display: flex;
+}
+
+#galeriephotos img {
+  width: calc(100% - 0px);
+  height: 220px;
+  object-fit: cover;
+  background-size: contain;
+  object-position: 0 -21px;
+}
+
+@media screen and (min-width: 500px) {
+  #galeriephotos img {
+    width: calc(50% - 10px);
+    height: 220px;
+    object-fit: cover;
+    background-size: contain;
+    object-position: 0 -21px;
+  }
+
+  .trierpar {
+    height: 200px;
+    position: relative;
+    display: flex;
+    top: 910px;
+  }
+}
+
+@media screen and (min-width: 669px) {
+  #galeriephotos img {
+    width: calc(32% - 10px);
+    height: 220px;
+    object-fit: cover;
+    background-size: contain;
+    object-position: 0px 0px;
+  }
+  .articlephotograph {
+    margin-top: 0px;
+  }
+  .trierpar {
+    top: 117px;
+  }
+}
+/* autre posibilité 
+
+
+*/
+.heartcontainer {
+  display: flex;
+  flex-direction: row-reverse;
+  column-gap: 10px;
+}
+/* 1er enlevement bordure icon */
+.heartbtn {
+  border: 0px;
+
+  font-size: 20px;
+}
+/* 2eme enlevement contour icon peu visible  */
+button.heartbtn {
+  background-color: white;
+  margin-top: -3px;
+}
+.heartbtn::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f004";
+  display: inline-block;
+  padding-left: 0px;
+  vertical-align: middle;
+  font-weight: 900;
+  color: #911c1c;
+}
+/* nbre de like */
+a#clicks {
+  color: #901c1c;
+  font-weight: 600;
+  font-size: 22px;
 }
