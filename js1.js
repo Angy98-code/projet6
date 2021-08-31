@@ -1,6 +1,6 @@
 const photographArray = [
   {
-    portrait: "MimiKeel.jpg.jpg",
+    portrait: "MimiKeel.jpg",
     name: "Mimi Keel",
     id: 243,
     city: "London",
@@ -8,10 +8,9 @@ const photographArray = [
     tagline: "Voir le beau dans le quotidien",
     price: 400,
     tags: ["portrait", "events", "travel", "animals"],
-    contact: "Mimi Keel",
   },
   {
-    portrait: "EllieRoseWilkens.jpg.jpg",
+    portrait: "EllieRoseWilkens.jpg",
     name: "Ellie-Rose Wilkens",
     id: 930,
     city: "Paris",
@@ -19,10 +18,9 @@ const photographArray = [
     tagline: "Capturer des compositions complexes",
     price: 250,
     tags: ["sports", "architecture"],
-    contact: "Ellie-Rose Wilkens",
   },
   {
-    portrait: "TracyGalindo.jpg.jpg",
+    portrait: "TracyGalindo.jpg",
     name: "Tracy Galindo",
     id: 82,
     city: "Montreal",
@@ -30,10 +28,9 @@ const photographArray = [
     tagline: "Photographe freelance",
     price: 500,
     tags: ["art", "fashion", "events"],
-    contact: "Tracy Galindo",
   },
   {
-    portrait: "NabeelBradford.jpg.jpg",
+    portrait: "NabeelBradford.jpg",
     name: "Nabeel Bradford",
     id: 527,
     city: "Mexico City",
@@ -41,10 +38,9 @@ const photographArray = [
     tagline: "Toujours aller de l'avant",
     price: 350,
     tags: ["travel", "portrait"],
-    contact: "Nabeel Bradford",
   },
   {
-    portrait: "RhodeDubois.jpg.jpg",
+    portrait: "RhodeDubois.jpg",
     name: "Rhode Dubois",
     id: 925,
     city: "Barcelona",
@@ -52,10 +48,9 @@ const photographArray = [
     tagline: "Je crée des souvenirs",
     price: 275,
     tags: ["sport", "fashion", "events", "animals"],
-    contact: "Rhode Dubois",
   },
   {
-    portrait: "MarcelNikolic.jpg.jpg",
+    portrait: "MarcelNikolic.jpg",
     name: "Marcel Nikolic",
     id: 195,
     city: "Berlin",
@@ -63,7 +58,6 @@ const photographArray = [
     tagline: "Toujours à la recherche de LA photo",
     price: 300,
     tags: ["travel", "architecture"],
-    contact: "Marcel Nikolic",
   },
 ];
 
@@ -77,9 +71,8 @@ const getListItemHtml = (
   tagline,
   price,
   tags
-) => `
-<div id="list_container1">
-<a href="index2.html?photographId=${id}" id="list_container" class="portrait"><img src="images/${portrait}"/></a>        
+) => `<div id="list_container1">
+<a href="index2.html?photographId=${id}" id="list_container" class="portrait"><img src="image/${portrait}"/></a>        
 <h2 class="name">${name}</h2>
     <template class="id">${id}</template>
     <div class="city_country">${city}, ${country}</div>
@@ -94,11 +87,9 @@ const getListItemHtml = (
         )
         .join("")}
                     </ul>                               
-    </div>
-    `;
+    </div>`;
 
 const element = document.getElementById("list_container");
-console.log(element);
 element.innerHTML = photographArray
   .map((photograph) => {
     return getListItemHtml(

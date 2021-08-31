@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr">
+<div lang="fr">
 
-<head>
-    <meta charset="utf-8" />
-    <title>Fisheye photograph</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/941542f664.js" crossorigin="anonymous"></script>
-    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <head>
+        <meta charset="utf-8" />
+        <title>Fisheye photograph</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://kit.fontawesome.com/941542f664.js" crossorigin="anonymous"></script>
+        <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
   -->
-</head>
+    </head>
 
-<body>
+    <div>
 
 
-    <div id=pagePhotograph>
-        <!--LOGO-->
-        <header class="headerphotograph">
-            <div id="logophotograph"><img src="Logo.png" id="logophotograph" /> </div>
-        </header>
-        <!--présentation profil photograph-->
-        <main class="mainphotograph">
-            <section class="sectionphotograph">
-                <div id="list_photographcontainer"></div>
-                <!--
+        <div id=pagePhotograph>
+            <!--LOGO-->
+            <header class="headerphotograph">
+                <div id="logophotograph"><img src="Logo.png" id="logophotograph" /> </div>
+            </header>
+            <!--présentation profil photograph-->
+            <main class="mainphotograph">
+                <section class="sectionphotograph">
+                    <div id="list_photographcontainer"></div>
+                    <!--
                     <div class="coordonnées">
                         <h2 class="name">${name}</h2>
                         <template class="id">${id}</template>
@@ -35,78 +35,79 @@
                         </ul>
                     </div>
                 -->
-                <!---attention w-->
+                    <!---attention w-->
 
-                <!--formulaire-->
-                <!--formulaire-->
-                <div class="formulaire">
+                    <!--formulaire-->
+                    <!--formulaire-->
+                    <div class="formulaire">
 
-                    <button class="modal-btn">
-                        Contactez-moi
-                    </button>
+                        <button class="modal-btn">
+                            Contactez-moi
+                        </button>
 
-                    <div class="bground">
-                        <div class="content">
-                            <span class="close" id="closebtn"></span>
-                            <div class="modal-body">
-                                <form id="inscription" novalidate name="reserve">
-                                    <div class="hautformulaire">
-                                        <p class="contactez-moi">Contactez-moi</p>
-                                        <p class="namephotograph">$name</p>
+                        <div class="bground">
+                            <div class="content">
+                                <span class="close" id="closebtn"></span>
+                                <div class="modal-body">
+                                    <form id="inscription" novalidate name="reserve">
+                                        <div class="hautformulaire">
+                                            <p class="contactez-moi">Contactez-moi</p>
+                                            <p class="namephotograph"></p>
 
+                                        </div>
+                                        <br />
+
+                                        <!-- 1ere data : prénom-->
+                                        <div class="formData">
+                                            <label for="firstname">Prénom</label>
+                                            <input class="textcontrol" type="text" id="firstname" name="firstname" />
+
+                                            <div id="texterrorfirstname"></div>
+                                        </div>
+                                        <br />
+                                        <!--2eme data : nom-->
+                                        <div class="formData">
+                                            <label for="lastname">Nom</label>
+                                            <input class="textcontrol" type="text" id="lastname" name="lastname" />
+                                            <div id="texterrorlastname"></div>
+                                        </div>
+                                        <br />
+                                        <!--3eme data : email-->
+
+                                        <div class="formData">
+                                            <label for="email">E-mail</label>
+                                            <input class="textcontrol" id="email" name="email" />
+                                            <div id="texterroremail"></div>
+                                        </div>
+                                        <br />
+                                        <!--4eme date : message-->
+                                        <div class="formData">
+                                            <label for="message">Votre message</label>
+                                            <textarea class="textcontrol" type="text" id="message" name="message"
+                                                minlength="3" maxlength="174"></textarea>
+                                            <div id="texterrormessage"></div>
+                                        </div>
+                                        <br />
+                                        <!--bouton transmission-->
+                                        <input class="btn-submit" type="submit" id="submit" name="submit"
+                                            value="Envoyer" />
+                                    </form>
+                                    <!--message envoyer en dehors de form-->
+                                    <div id="submitMessage" style="display:none">
+                                        <p class="submitMessage">Merci ! <br>Pour votre message.</p>
+                                        <button class="btn-validation" id="btn-validation" type="button">Fermer</button>
                                     </div>
-                                    <br />
+                                    <!--pas nécessaire ce message apparemment-->
 
-                                    <!-- 1ere data : prénom-->
-                                    <div class="formData">
-                                        <label for="firstname">Prénom</label>
-                                        <input class="textcontrol" type="text" id="firstname" name="firstname" />
-
-                                        <div id="texterrorfirstname"></div>
-                                    </div>
-                                    <br />
-                                    <!--2eme data : nom-->
-                                    <div class="formData">
-                                        <label for="lastname">Nom</label>
-                                        <input class="textcontrol" type="text" id="lastname" name="lastname" />
-                                        <div id="texterrorlastname"></div>
-                                    </div>
-                                    <br />
-                                    <!--3eme data : email-->
-
-                                    <div class="formData">
-                                        <label for="email">E-mail</label>
-                                        <input class="textcontrol" id="email" name="email" />
-                                        <div id="texterroremail"></div>
-                                    </div>
-                                    <br />
-                                    <!--4eme date : message-->
-                                    <div class="formData">
-                                        <label for="message">Votre message</label>
-                                        <textarea class="textcontrol" type="text" id="message" name="message"
-                                            minlength="3" maxlength="174"></textarea>
-                                        <div id="texterrormessage"></div>
-                                    </div>
-                                    <br />
-                                    <!--bouton transmission-->
-                                    <input class="btn-submit" type="submit" id="submit" name="submit" value="Envoyer" />
-                                </form>
-                                <!--message envoyer en dehors de form-->
-                                <div id="submitMessage" style="display:none">
-                                    <p class="submitMessage">Merci ! <br>Votre réservation a bien été reçue.</p>
-                                    <button class="btn-validation" id="btn-validation" type="button">Fermer</button>
                                 </div>
-                                <!--pas nécessaire ce message apparemment-->
-
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--fin-->
-            </section>
-            <br />
-            <!-- BOUTON TRIER LISTBOX 9-->
-            <!--              <DIV class="boutontrier">
+                    <!--fin-->
+                </section>
+                <br />
+                <!-- BOUTON TRIER LISTBOX 9-->
+                <!--              <DIV class="boutontrier">
                                     <p class="triertext">Trier par</p>
                                     <div class="ouvertureboutontrier">
                                         <button class="boutontrier"> Popularité</button>
@@ -123,8 +124,9 @@
                                     </div>
                                 </DIV>
                             -->
-            <!----sous select-->
-            <div class="trierpar">
+
+                <!----sous select-->
+                <!--            <div class="trierpar">
                 <p class="triertext">Trier par</p>
 
                 <div class="custom_select">
@@ -136,8 +138,8 @@
                     </select>
                 </div>
             </div>
-
-            <!--
+        -->
+                <!--
                                 <div class="newselect">
                                     popularité
                 
@@ -147,50 +149,83 @@
                                 </div>
                             -->
 
-            <!--ou mettre les photos ?-->
-        </main>
-        <article class="articlephotograph">
+                <!--ou mettre les photos ?-->
+            </main>
+            <article id="articlephotograph"></article>
+            <!--exemple-->
 
-            <div id="galeriephotos">
+            <!--       <div id="carousel2">
+            -->
 
-                <img src="images/Mimi Keel_Animals_Rainbow.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Travel_HillsideColor.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Travel_Lonesome.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Event_BenevidesWedding.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Event_SeasideWedding.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Portrait_Wednesday.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Portrait_Nora.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_Portrait_Background.jpg" alt="photo Mimi Keel" />
-                <img src="images/Mimi_Keel_video_Animals_Wild_Horses_in_the_mountains.mp4" alt="photo Mimi Keel" />
-
+            <div class="grid">
+                <a href="https://picsum.photos/id/1/200/300"><img src="https://picsum.photos/id/1/200/300" alt=""></a>
+                <a href="https://picsum.photos/200/300?grayscale"><img src="https://picsum.photos/200/300?grayscale"
+                        alt=""></a>
             </div>
+
+
+            <!--
+            <div> <img src="images/Mimi Keel_Animals_Rainbow.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Travel_HillsideColor.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Travel_Lonesome.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Event_BenevidesWedding.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Event_SeasideWedding.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Portrait_Wednesday.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Portrait_Nora.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_Portrait_Background.jpg" alt="photo Mimi Keel" /></div>
+            <div> <img src="images/Mimi_Keel_video_Animals_Wild_Horses_in_the_mountains.mp4" alt="photo Mimi Keel" />
+            </div>
+
+        </div>-->
+            <!--
+            <div class="lightbox">
+                <button class="lightbox__close"><i class="fas fa-times"></i></button>
+                <button class="lightbox__prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox__next"><i class="fas fa-chevron-right"></i></button>
+                <div class="lightbox__container">
+                    <a href=""> <img src="images/Mimi Keel_Animals_Rainbow.jpg" alt="photo Mimi Keel" /></a>
+                    <a href=""> <img src="images/Mimi_Keel_Travel_HillsideColor.jpg" alt="photo Mimi Keel" /></a>
+                    <a href=""> <img src="images/Mimi_Keel_Travel_Lonesome.jpg" alt="photo Mimi Keel" />
+                    </a>
+                    <a href=""> <img src="images/Mimi_Keel_Event_BenevidesWedding.jpg" alt="photo Mimi Keel" />
+                    </a>
+                    <a href=""> <img src="images/Mimi_Keel_Event_SeasideWedding.jpg" alt="photo Mimi Keel" />
+                    </a>
+                    <a href=""> <img src="images/Mimi_Keel_Portrait_Wednesday.jpg" alt="photo Mimi Keel" />
+                    </a>
+                    <a href=""> <img src="images/Mimi_Keel_Portrait_Nora.jpg" alt="photo Mimi Keel" />
+                    </a>
+                    <a href=""> <img src="images/Mimi_Keel_Portrait_Background.jpg" alt="photo Mimi Keel" /></a>
+                    <a href=""> <img src="images/Mimi_Keel_video_Animals_Wild_Horses_in_the_mountains.mp4"
+                            alt="photo Mimi Keel" />
+                    </a>
+                </div>-->
+
+
             <!--2 like sous forme de coeur et son compteur individuel -->
-            <div class="heartcontainer">
-                <button type="button" class="heartbtn" onclick="heart()" border:0px;></button>
-                <p><a id="clicks">0</a></p>
-            </div>
-            <br />
+            <!--    <div class="heartcontainer">
+            <button type="button" class="heartbtn" onclick="heart()" border:0px;></button>
+            <p><a id="clicks">0</a></p>
+        </div>
+        <br />-->
             <!-- 3 like globale de chaque photograph et son prix en fixe-->
             <div class="likepricecard">
                 <!-- ca va être du innerHTML pour le nombre de like total, faire reverse si nécessaire-->
-                <div class="photographprice">
 
-
-                </div>
 
             </div>
 
 
-            <!--4 TAF-->
-            <div id="modalgalerie"></div>
+            <!--4 TAF les photos-->
+            <div id="galerycard"></div>
 
-        </article>
+            </article>
 
 
-    </div>
+        </div>
 
-    <script type="text/javascript" src="js2.js" alt="photo du photographe"></script>
+        <script type="text/javascript" src="js1.js" alt="photo du photographe"></script>
+        <script type="text/javascript" src="js2.js" alt="photo du photographe"></script>
+        </body>
 
-</body>
-
-</html>
+        </html>
