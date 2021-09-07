@@ -71,7 +71,8 @@ const getListItemHtml = (
   tagline,
   price,
   tags
-) => `<div id="list_container1">
+) => `
+<div id="list_container1">
 <a href="index2.html?photographId=${id}" id="list_container" class="portrait"><img src="image/${portrait}"/></a>        
 <h2 class="name">${name}</h2>
     <template class="id">${id}</template>
@@ -87,9 +88,11 @@ const getListItemHtml = (
         )
         .join("")}
                     </ul>                               
-    </div>`;
+    </div>
+    `;
 
 const element = document.getElementById("list_container");
+//debugger;
 element.innerHTML = photographArray
   .map((photograph) => {
     return getListItemHtml(
@@ -105,3 +108,7 @@ element.innerHTML = photographArray
   })
   .join("");
 console.log(photographArray);
+
+// tags
+
+//console.log({ tags });

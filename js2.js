@@ -1,4 +1,6 @@
 let data;
+let mediasFiltered;
+//let heartFilter;
 //
 // PARTIE PROFIL
 //
@@ -14,8 +16,7 @@ const getPageProfil = (
   portrait
 ) =>
   `<div class="partie1profilphotograph">
-<div><h2 class="h2photograph">${name}</h2></div>
-
+    <div><h2 class="h2photograph">${name}</h2></div>
     <template class="id">${id}</template>
     <div class="city_country">${city}, ${country}</div>
     <div class="taglinephotograph">${tagline}</div>
@@ -27,60 +28,103 @@ const getPageProfil = (
             `<li><a href="index.html" class="tagsphotograph">#${tag}</a></li>`
         )
         .join("")}
-                    </ul>                               
-                          
-    
-<div class="taillephotographiphone">
+    </ul>                               
+        
+  <div class="taillephotographiphone">
     <img src="image/${portrait}" id="portraitphotograph"/>       
-</div>
-</div>
-<div class="priceEachOne">${price}€ / jour
   </div>
+
+    <div class="priceEachOne">
+    <div class="totallikes"></div>
+      <div class="totalprice">${price}€ / jour</div>
+    </div>
+  
+  </div>        
+
 <article id="articlephotograph"></article>
- <div class="trierpar">
-                <p class="triertext">Trier par</p>
-
-                <div class="custom_select">
-
-                    <select name="" id="">
-                        <option id="option1" class="option1" value="">Popularité</option>
-                        <option value="1">Date</option>
-                        <option value="2">Titre</option>
-                    </select>
-                </div>
-           
-
-</div>
-
-
-
-
-
-  `;
+  <div class="trierpar">
+    <p class="triertext">Trier par</p>
+      <div class="custom_select">
+        <select name="" id="">
+          <option id="option1" class="optionpopularité" value="">Popularité</option>
+          <option class="optiondate" value="1">Date</option>
+          <option class="optiontitre" value="2">Titre</option>
+        </select>
+      </div>
+  </div>`;
 
 //
 // PARTIE GALERIE PHOTOS
 //
+//lightbox
+const openLightbox = (id, index) => {
+  console.log(id);
 
-const getPageGalery = (id, photographerId, title, image, tags, likes, date) =>
-  `<div class="articlegalery">
+  //passer la lightbox en display block
+  const lightbox = document.querySelector(".lightbox");
+  lightbox.style.display = "block";
+  //choper la ref à l'img ds lightbox
+  const image = document.querySelector(".lightbox img");
+  console.log(image);
+  //définir la src de l'img via attribut src
+  const mediaClick = mediasFiltered.find((media) => media.id === id);
+  image.src = `image/${mediaClick.image}`;
+
+  // POUR VIDEO, si je met video dans innerHtml les img indefined et video ne s'affiche pas
+  const video = document.querySelector(".lightbox video");
+  console.log(video);
+  const videoClick = mediasFiltered.find((media) => media.id === id);
+  video.src = `image/${videoClick.video}`;
+
+  const affichageLightbox = () => {
+    if (img === img) {
+      return img;
+    } else if (video === video) {
+      return video;
+    }
+  };
+  // image.src.mp4 = `image/${mediaClick.video}`;
+  //!!!!! manque pour video
+};
+
+//const likeContainer (likes) => {
+//pour likes TAF
+//let likesNumber = likes.findLikesNumber((el) => el === "number");
+//console.log(likesNumber);
+
+//}
+// array galery
+const getPageGalery = (
+  id,
+  photographerId,
+  title,
+  image,
+  video,
+  tags,
+  likes,
+  date,
+  index
+) => `<div class="articlegalery">
   <template>${id}</template>
   <template>${photographerId}</template>
-  
   <template>${tags}</template>
-<div class"photocard">
-<a href=""><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
-</a>
-<div class="cardonlytitlelikes"> <p>${title}</p>
-<div class="heartbtn"> 
-  <span class="likes">${likes}</span></div>
+
+  <div class"photocard">
+    <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
+    </div>
+    <div onclick="return openLightbox(${id}, ${index})"><video src="image/${video}" class="videosgalery" alt=""/><template>${video}</template>
+    </div>
   </div>
+
+  <div class="cardonlytitlelikes">
+    <p>${title}</p>
+    <div class="heartbtn"> 
+      <span class="onelike">${likes}</span>
+    </div>
   </div>
+  
   <template>${date}</template>
   </div>`;
-
-// demo c'était caousel2 avant!
-// render profil et galerie photo
 //
 const renderHTML = () => {
   const queryString_url_id = window.location.search;
@@ -93,16 +137,19 @@ const renderHTML = () => {
   const photograph = data.photographers.find(
     (element) => element.id === idSearch
   );
+
   //pour media
-  const mediasFiltered = data.media.filter(
-    ({ photographerId }) => photographerId === idSearch
+  mediasFiltered = data.media.filter(
+    (media) => media.photographerId === idSearch
   );
-  // . find permet de récupérer le 1er element du tableau qui valide
+
+  // . find permet de récupérer le 1er element du tableau qui valide*/
   // la condition
   console.log("photograph", { photograph });
   console.log("media", { mediasFiltered });
 
   const elementPhotograph = document.getElementById("list_photographcontainer");
+  //debugger
   elementPhotograph.innerHTML = getPageProfil(
     photograph.name,
     photograph.id,
@@ -115,22 +162,67 @@ const renderHTML = () => {
   );
 
   const mediasFilteredHtml = mediasFiltered
-    .map((media) =>
+    .map((media, index) =>
       getPageGalery(
         media.id,
         media.photographerId,
         media.title,
         media.image,
+        media.video,
         media.tags,
         media.likes,
         media.date,
-        media.price
+        media.price,
+        index
       )
     )
     .join("");
   const elementContainerGallery = document.getElementById("articlephotograph");
   elementContainerGallery.innerHTML = mediasFilteredHtml; // elementContainerGallery est la référence vers l'élément dans lequel tu veux afficher tes photos.
+
+  //____________ name in modal
+  /*const modalInputName = (name) => {
+    //trouver name dans photograph
+    photograph.name;
+    return `${name}`;
+  };*/
+  //ok return the name
+
+  // photograph.name.innerHTML = document.querySelector("p.namephotograph");
+  console.log(photograph.name);
+  //elementModalInputName.innerHTML = photograph.name;
+  document.querySelector(".namephotograph").innerHTML = photograph.name;
+
+  // likes
+
+  //forEach likes
+  //comment trouver les likes
+  const lesLikes =
+    parseInt(mediasFiltered[0].likes) +
+    parseInt(mediasFiltered[1].likes) +
+    parseInt(mediasFiltered[2].likes) +
+    parseInt(mediasFiltered[3].likes) +
+    parseInt(mediasFiltered[4].likes) +
+    parseInt(mediasFiltered[5].likes) +
+    parseInt(mediasFiltered[6].likes) +
+    parseInt(mediasFiltered[7].likes) +
+    parseInt(mediasFiltered[8].likes) +
+    parseInt(mediasFiltered[9].likes);
+  //const lesLikes = 0;
+  //mediasFiltered.forEach((media) => (lesLikes += parseInt(medias.likes)));
+  console.log(lesLikes);
+
+  document.querySelector(".totallikes").innerHTML = lesLikes;
+
+  //mediasFiltered.likes.forEach((lesLike) => {
+  //  lesLikes += lesLike;
+  //});
+  //console.log(lesLikes);
+  //const arr = [1, 2, 3, 4];
+  //const reducer = (accumulator, curr) => accumulator + curr;
+  //console.log(arr.reduce(reducer));
 };
+
 //
 // FETCH
 //
@@ -147,165 +239,99 @@ fetch("./FishEyeData.json")
     //img.src = data[0].url;
   });
 
-//
-//
-/*let elementContainerGallery = document.getElementById("articlephotograph");
+// video
 
-let newsArr = elementContainerGallery;
-let i = 0;
-let x = document.getElementById("demo");
-let timeoutId;
-function next() {
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-  }
-  i++;
-  if (i < newsArr.length) {
-    x.innerHTML = newsArr[i];
-  } else {
-    i = 0;
-    x.innerHTML = newsArr[i];
-  }
-  timeoutId = setTimeout(next, 2000);
+// likes
+const totalLikes = (likes) => {
+  innerHtml;
+};
+
+// name fonction, je veux que la fonction me retourne un nom
+/*const modalInputName = (name) => {
+  return `${name}`;
+};
+mediasFiltered = data.media.filter(
+  (media) => media.photographerId === idSearch
+);
+console.log(mediasFiltered);*/
+/*const queryString_url_id = window.location.search;
+  const urlSearchParams = new URLSearchParams(queryString_url_id);
+  const idSearch = parseInt(urlSearchParams.get("photographId"));
+  //pour photograph
+  const photograph = data.photographers.find(
+    (element) => element.id === idSearch
+  );
+
+  //pour media
+  mediasFiltered = data.media.filter(
+    (media) => media.photographerId === idSearch
+  );
+*/
+//photograph.nane.innerHTML = document.querySelector(".namephotograph");
+
+/////////////////////:galery plus des données plus haut
+function setupLightbox() {
+  // creer html de la lightbox , elle doit etre au depart en display none
+  const lightboxHtml = `<div class="lightbox">
+    <div class="lightbox__container">
+      <div class="lightbox__slide"><img /><video></video></div>
+      <div class="lightbox__prev"><i class="fas fa-chevron-left"></i></div>
+      <div class="lightbox__next"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <div class="lightbox__close"><i class="fas fa-times"></i></div>
+  </div>`;
+  // injecter au bon endroit html
+  const element = document.getElementById("lightbox");
+  element.innerHTML = lightboxHtml;
+}
+setupLightbox(); // appeler la fonction
+
+// fermeture gallery avec le bouton x     //ok
+const btnCloseLightbox = document.querySelector(".lightbox__close");
+const modallb = document.querySelector(".lightbox");
+btnCloseLightbox.addEventListener("click", function (event) {
+  modallb.style.display = "none";
+});
+
+////////___________slide
+/*
+var slideshows = document.querySelectorAll('[data-component="slideshow"]');
+slideshows.forEach(initSlideShow);
+
+function initSlideShow(slideshow) {
+
+	var slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`);
+
+	var index = 0, time = 5000;
+	slides[index].classList.add('active');
+
+	setInterval( () => {
+		slides[index].classList.remove('active');
+		
+		index++;
+		if (index === slides.length) index = 0;
+
+		slides[index].classList.add('active');
+
+	}, time);
 }
 
-function prev() {
-  i--;
-  if (i >= 0) {
-    x.innerHTML = newsArr[i];
-  } else {
-    i = newsArr.length - 1;
-    x.innerHTML = newsArr[i];
-  }
-}*/
-
-/////////////////////////////////:
-//
-// CAROUSEL //////////////////////////////////////////////
-//
-class LightBox {
-  //méthode static pour initialiser la lightbox
-  static init() {
-    const links = Array.from(
-      document
-        //comment appeler ${image}??? car ici on doit pouvoir
-        .querySelectorAll('a[href$=".png"], a[href$=".jpg"], a[href$=".jpeg"]')
-    );
-    const gallery = links.map((link) => link.getAttribute("href"));
-    // debugger
-    links.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        new LightBox(e.currentTarget.getAttribute("href"), gallery);
-      })
-    );
-  }
-  //gallery img chemin de la lightbox
-  //url de l'image et construire la structure html, images chaine de tableau de caractère
-  constructor(url, images) {
-    this.element = this.buildDOM(url);
-    this.loadImage(url);
-    //toujours keyup voir plus bas
-    this.images = images;
-    this.onKeyUp = this.onKeyUp.bind(this);
-    document.body.appendChild(this.element);
-
-    //loader sans ; erreur
-    loadImage(url);
-    {
-      this.url = null;
-      const image = new Image();
-      const container = this.element.querySelector(".lightbox__container");
-      const loader = document.createElement("div");
-      loader.classList.add("lightbox__loader");
-      container.innerHTML = "";
-      container.appendChild(loader);
-      image.onload = () => {
-        //console.log("chargé")
-        container.removeChild(loader);
-        container.appendChild(image);
-        this.url = url;
-      };
-      image.src = url;
-    }
-
-    //keyup voir plus bas
-    // document.addEventListener("keyup", this.onKeyUp.bind(this));
-    // comme changement au dessus plus besoin de le redéfinir donc :
-    document.addEventListener("keyup", this.onKeyUp);
-  }
-  //btn close mouse event en @param permet  de fermer la lightbox
-  close(e) {
-    e.preventDefault();
-    this.element.classList.add("fadeOut");
-    //au bout de 500 ms la lightbox disparait
-    window.setTimeout(() => {
-      this.element.parentElement.removeChild(this.element); // ou this.element.remove
-    }, 500);
-    //puis supprimer pour pas qu'il reste en mémoire
-    document.removeEventListener("keyup", this.onKeyUp);
-  }
-
-  next(e) {
-    e.preventDefault();
-    //debugger
-    let i = this.images.findIndex((image) => image === this.url);
-    if (i === this.images.length - 1) i = -1;
-    this.loadImage(this.images[i + 1]);
-  }
-  prev(e) {
-    e.preventDefault();
-    let i = this.images.findIndex((image) => image === this.url);
-    if (i === 0) i = this.images.length;
-    this.loadImage(this.images[i - 1]);
-  }
-
-  //fermer avec "echap"
-  onKeyUp(e) {
-    if (e.key === "Escape") {
-      this.close(e);
-    }
-    //fonctionne au clavier
-    else if (e.key === "ArrowLeft") {
-      this.prev(e);
-    } else if (e.key === "ArrowRight") {
-      this.next(e);
-    }
-  }
-
-  buildDOM(url) {
-    const dom = document.createElement("div");
-    dom.classList.add("lightbox");
-    dom.innerHTML = `<div class="lightbox">
-                <button class="lightbox__close"><i class="fas fa-times"></i></button>
-                <button class="lightbox__prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="lightbox__next"><i class="fas fa-chevron-right"></i></button>
-                <div class="lightbox__container">
-               <img src="https://picsum.photos/200/300?grayscale"
-                        alt="">
-                </div>`;
-    //fermeture lightbox
-    dom
-      .querySelector(".lightbox__close")
-      .addEventListener("click", this.close.bind(this));
-    dom
-      .querySelector(".lightbox__next")
-      .addEventListener("click", this.next.bind(this));
-
-    dom
-      .querySelector(".lightbox__prev")
-      .addEventListener("click", this.prev.bind(this));
-    return dom;
-  }
-}
-
-//dès chargement page initialiser lightbox
-LightBox.init();
-
-// FIN CAROUSEL ///////////////////
-
-/////////////////////////////////
-////
+	<div id="slideshow-example" data-component="slideshow">
+		<div role="list">
+			<div class="slide">
+				<img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=752&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+			</div>
+			<div class="slide">
+				<img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=750&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+			</div>
+			<div class="slide">
+				<img src="https://images.unsplash.com/photo-1498753427761-548428edfa67?w=889&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+			</div>
+		</div>
+	</div>
+*/
+//////////////////////////////////////////////////////////////////////////////
+///
 // BOUTON TRIER PAR
 //
 const renderSelect = () => {
@@ -384,15 +410,73 @@ const renderSelect = () => {
     this.classList.toggle("active");
   });
 };
-
 //
+//trier relier
+//
+/*
+let populariteBtn = document.querySelector(".optionpopularite");
+populariteBtn.addEventListener("click", function () {
+  const popularite = document.querySelector(".onelike");
+  //affichage par ordre de préférence
+  const populariteSorted = popularite.sort();
+  console.log(populariteSorted);
+  // oui mais selon le nombre de like,
+  //.article galery(photo+like+titre) doit moove
+});
+*/
+///////////////////////////////////////////////////////////////////////////////
+//
+//relier tag aux photograph
+// on click tag exemple portrait, que les photographes
+//avec tag portrait apparaissent
+// les autres en display none
+
+//...addEventListener on click
+//if tag portrait afficher photographe === portrait
+//else display.none
+
+// likes
+
+//var myButton = document.getElementsByClassName("onelike");
+//Getting the button with "my-button" as id.
+//var myOutput = document.querySelector(".heartBtn::after");
+//Getting the id for the tag where you want to output your number
+//var startNumber = 0;
+
+/*Creating a function where it adds 1 to the startNumber variable
+for every time you click on myButton.*
+function addToNumber() {
+  //Using template literal here.
+  myOutput.innerHTML = `The current number is: ${1 + startNumber++}`;
+  /*Sets the startNumber to 1+ startNumber++.
+ 	This makes it look like it starts to count from 1 and not 0
+    the first time you click the the button.*
+}
+myButton.onclick = addToNumber;*/
+// reappuyer enleve 1 like
+//let likesNumber = likes.findLikesNumber((el) => el === "number");
+//console.log(likesNumber);
+
+//const totalLikes = () => {
+//const elt = document.querySelector(".onelikes");
+//elt.setAttribute("id", "likes");
+//let allLikes = 0;
+//ph//otograph.foreach((likes) => (allLikes += likes));
+//};
+
 // compteur de like ils se remettent à 0 !!
 //
+/*
+console.log("likes", likes);
 let clicks = 0;
 function heart() {
   clicks += 1;
   document.getElementById("clicks").innerHTML = clicks;
 }
+function heartMinus() {
+  clicks -= 1;
+  document.getElementById("clicks").innerHTML = clicks;
+}*/
 //
 //
 // NOMBRE DE LIKES TOTAL
@@ -400,7 +484,10 @@ function heart() {
 
 //const likes = mediasFiltered; //tous les likes de tous les photographes du site
 //console.log(likes.length);
-//OKOK OKOK OK OK OK OK OK FORMULAIRE
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+// FORMULAIRE
 //
 // DOM Elements bouton je m'inscris modalbtn !!! c'est le button de chaque page
 
@@ -429,7 +516,7 @@ const validateFirst = (event) => {
 
   if (valueNameInput.length < 2) {
     errorText.innerHTML =
-      "Merci d'entrer au minimum 2 caractères <br>pour le champ du prénom.";
+      "Merci d'entrer au minimum 2 caractères pour le champ du prénom.";
     return false;
   } else if (
     nameRegex.test(nameInput.value) === true && ///erreur si valueNameInput!!!!!!!
@@ -453,7 +540,7 @@ const validateLast = (_event) => {
 
   if (valueLastNameInput.length < 2) {
     errorText.innerHTML =
-      "Merci d'entrer au minimum 2 caractères <br>pour le champ du nom.";
+      "Merci d'entrer au minimum 2 caractères pour le champ du nom.";
     return false;
   } else if (
     lastNameRegex.test(lastNameInput.value) == true && ///erreur si valueNameInput!!!!!!!
@@ -479,7 +566,7 @@ const validateEmail = (_event) => {
   if (valueNameInputEmail == "") {
     //textEmail = document.getElementById("texterroremail").textContent;
     //document.getElementById("texterroremail").textContent =
-    errorText.innerHTML = "Merci de renseigner une adresse email <br> valide.";
+    errorText.innerHTML = "Merci de renseigner une adresse email valide.";
     return false;
   } else if (!emailFormat.test(valueNameInputEmail)) {
     document.getElementById("texterroremail").textContent =
@@ -566,3 +653,4 @@ btnValidation.addEventListener("click", function (_event) {
   modalbg.style.display = "none";
 });
 /// FIN FORMULAIRE
+/////////////////////////////////////////////////////////////////////////////////
