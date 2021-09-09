@@ -104,16 +104,14 @@ const getPageGalery = (
   likes,
   date,
   index
-) => `<div class="articlegalery">
+) => {
+  let htmlString = `<div class="articlegalery">
   <template>${id}</template>
   <template>${photographerId}</template>
   <template>${tags}</template>
 
   <div class"photocard">
-    <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
-    </div>
-    <div onclick="return openLightbox(${id}, ${index})"><video src="image/${video}" class="videosgalery" alt=""/><template>${video}</template>
-    </div>
+  #bloctoreplace
   </div>
 
   <div class="cardonlytitlelikes">
@@ -125,6 +123,21 @@ const getPageGalery = (
   
   <template>${date}</template>
   </div>`;
+  const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
+    </div>
+  `;
+
+  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt=""/><template>${video}</template>
+    </div>
+  `;
+  if (video) {
+    htmlString = htmlString.replace("#bloctoreplace", htmlVideo);
+  } else {
+    htmlString = htmlString.replace("#bloctoreplace", htmlImage);
+  }
+  return htmlString;
+};
+
 //
 const renderHTML = () => {
   const queryString_url_id = window.location.search;
@@ -195,9 +208,11 @@ const renderHTML = () => {
 
   // likes
 
-  //forEach likes
+  //forEach likes // faire une map avec likes // find? // reduce()
+  // affichage popularité, date ... https://www.zendevs.xyz/comment-trier-un-tableau-en-javascript-avec-la-methode-sort/
+  // comment appeler les données de json, tableau
   //comment trouver les likes
-  const lesLikes =
+  /* const lesLikes =
     parseInt(mediasFiltered[0].likes) +
     parseInt(mediasFiltered[1].likes) +
     parseInt(mediasFiltered[2].likes) +
@@ -207,12 +222,23 @@ const renderHTML = () => {
     parseInt(mediasFiltered[6].likes) +
     parseInt(mediasFiltered[7].likes) +
     parseInt(mediasFiltered[8].likes) +
-    parseInt(mediasFiltered[9].likes);
-  //const lesLikes = 0;
-  //mediasFiltered.forEach((media) => (lesLikes += parseInt(medias.likes)));
+    parseInt(mediasFiltered[9].likes);*/
+  let lesLikes = 0;
+  mediasFiltered.forEach((media) => {
+    // console.log(lesLikes, medias);
+    return (lesLikes += parseInt(media.likes));
+  });
   console.log(lesLikes);
 
   document.querySelector(".totallikes").innerHTML = lesLikes;
+  // il faut le for
+  const array = [1, 2, 3, 4];
+  let sum = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i];
+  }
+  console.log(sum);
 
   //mediasFiltered.likes.forEach((lesLike) => {
   //  lesLikes += lesLike;
@@ -274,7 +300,7 @@ function setupLightbox() {
   // creer html de la lightbox , elle doit etre au depart en display none
   const lightboxHtml = `<div class="lightbox">
     <div class="lightbox__container">
-      <div class="lightbox__slide"><img /><video></video></div>
+      <div class="lightbox__slide"><img /><video controls></video></div>
       <div class="lightbox__prev"><i class="fas fa-chevron-left"></i></div>
       <div class="lightbox__next"><i class="fas fa-chevron-right"></i></div>
     </div>
@@ -654,3 +680,30 @@ btnValidation.addEventListener("click", function (_event) {
 });
 /// FIN FORMULAIRE
 /////////////////////////////////////////////////////////////////////////////////
+var newsArr = [];
+var i = 0;
+var x = document.querySelector(".lightbox__slide");
+var timeoutId;
+function next() {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  i++;
+  if (i < newsArr.length) {
+    x.innerHTML = newsArr[i];
+  } else {
+    i = 0;
+    x.innerHTML = newsArr[i];
+  }
+  timeoutId = setTimeout(next, 2000);
+}
+
+function prev() {
+  i--;
+  if (i >= 0) {
+    x.innerHTML = newsArr[i];
+  } else {
+    i = newsArr.length - 1;
+    x.innerHTML = newsArr[i];
+  }
+}
