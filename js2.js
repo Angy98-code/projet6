@@ -162,7 +162,7 @@ const renderHTML = () => {
   console.log("media", { mediasFiltered });
 
   const elementPhotograph = document.getElementById("list_photographcontainer");
-  //debugger
+
   elementPhotograph.innerHTML = getPageProfil(
     photograph.name,
     photograph.id,
@@ -320,6 +320,22 @@ btnCloseLightbox.addEventListener("click", function (event) {
 });
 
 ////////___________slide
+/*
+let carrousel = {
+nbSlide : 0, //nbre de slide du carrousel
+nbCurrent : 1, // element courant
+elemCurrent : null, //element affiché
+elem : null, //quelle image réinitialiser
+
+
+init : function(elem){
+this.nbSlide=
+
+}
+
+};
+*/
+
 /*
 var slideshows = document.querySelectorAll('[data-component="slideshow"]');
 slideshows.forEach(initSlideShow);
@@ -707,3 +723,5 @@ function prev() {
     x.innerHTML = newsArr[i];
   }
 }
+
+///// ______________lien tags
