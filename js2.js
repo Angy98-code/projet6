@@ -46,7 +46,7 @@ const getPageProfil = (
     <p class="triertext">Trier par</p>
       <div class="custom_select">
         <select name="" id="">
-          <option id="option1" class="optionpopularité" value="">Popularité</option>
+          <option id="option1" class="optionpopularite" value="">Popularité</option>
           <option class="optiondate" value="1">Date</option>
           <option class="optiontitre" value="2">Titre</option>
         </select>
@@ -87,12 +87,6 @@ const openLightbox = (id, index) => {
   //!!!!! manque pour video
 };
 
-//const likeContainer (likes) => {
-//pour likes TAF
-//let likesNumber = likes.findLikesNumber((el) => el === "number");
-//console.log(likesNumber);
-
-//}
 // array galery
 const getPageGalery = (
   id,
@@ -121,7 +115,7 @@ const getPageGalery = (
     </div>
   </div>
   
-  <template>${date}</template>
+  <template class="date">${date}</template>
   </div>`;
   const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
     </div>
@@ -193,36 +187,12 @@ const renderHTML = () => {
   const elementContainerGallery = document.getElementById("articlephotograph");
   elementContainerGallery.innerHTML = mediasFilteredHtml; // elementContainerGallery est la référence vers l'élément dans lequel tu veux afficher tes photos.
 
-  //____________ name in modal
-  /*const modalInputName = (name) => {
-    //trouver name dans photograph
-    photograph.name;
-    return `${name}`;
-  };*/
-  //ok return the name
-
   // photograph.name.innerHTML = document.querySelector("p.namephotograph");
   console.log(photograph.name);
   //elementModalInputName.innerHTML = photograph.name;
   document.querySelector(".namephotograph").innerHTML = photograph.name;
 
   // likes
-
-  //forEach likes // faire une map avec likes // find? // reduce()
-  // affichage popularité, date ... https://www.zendevs.xyz/comment-trier-un-tableau-en-javascript-avec-la-methode-sort/
-  // comment appeler les données de json, tableau
-  //comment trouver les likes
-  /* const lesLikes =
-    parseInt(mediasFiltered[0].likes) +
-    parseInt(mediasFiltered[1].likes) +
-    parseInt(mediasFiltered[2].likes) +
-    parseInt(mediasFiltered[3].likes) +
-    parseInt(mediasFiltered[4].likes) +
-    parseInt(mediasFiltered[5].likes) +
-    parseInt(mediasFiltered[6].likes) +
-    parseInt(mediasFiltered[7].likes) +
-    parseInt(mediasFiltered[8].likes) +
-    parseInt(mediasFiltered[9].likes);*/
   let lesLikes = 0;
   mediasFiltered.forEach((media) => {
     // console.log(lesLikes, medias);
@@ -239,14 +209,6 @@ const renderHTML = () => {
     sum += array[i];
   }
   console.log(sum);
-
-  //mediasFiltered.likes.forEach((lesLike) => {
-  //  lesLikes += lesLike;
-  //});
-  //console.log(lesLikes);
-  //const arr = [1, 2, 3, 4];
-  //const reducer = (accumulator, curr) => accumulator + curr;
-  //console.log(arr.reduce(reducer));
 };
 
 //
@@ -272,29 +234,6 @@ const totalLikes = (likes) => {
   innerHtml;
 };
 
-// name fonction, je veux que la fonction me retourne un nom
-/*const modalInputName = (name) => {
-  return `${name}`;
-};
-mediasFiltered = data.media.filter(
-  (media) => media.photographerId === idSearch
-);
-console.log(mediasFiltered);*/
-/*const queryString_url_id = window.location.search;
-  const urlSearchParams = new URLSearchParams(queryString_url_id);
-  const idSearch = parseInt(urlSearchParams.get("photographId"));
-  //pour photograph
-  const photograph = data.photographers.find(
-    (element) => element.id === idSearch
-  );
-
-  //pour media
-  mediasFiltered = data.media.filter(
-    (media) => media.photographerId === idSearch
-  );
-*/
-//photograph.nane.innerHTML = document.querySelector(".namephotograph");
-
 /////////////////////:galery plus des données plus haut
 function setupLightbox() {
   // creer html de la lightbox , elle doit etre au depart en display none
@@ -319,59 +258,6 @@ btnCloseLightbox.addEventListener("click", function (event) {
   modallb.style.display = "none";
 });
 
-////////___________slide
-/*
-let carrousel = {
-nbSlide : 0, //nbre de slide du carrousel
-nbCurrent : 1, // element courant
-elemCurrent : null, //element affiché
-elem : null, //quelle image réinitialiser
-
-
-init : function(elem){
-this.nbSlide=
-
-}
-
-};
-*/
-
-/*
-var slideshows = document.querySelectorAll('[data-component="slideshow"]');
-slideshows.forEach(initSlideShow);
-
-function initSlideShow(slideshow) {
-
-	var slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`);
-
-	var index = 0, time = 5000;
-	slides[index].classList.add('active');
-
-	setInterval( () => {
-		slides[index].classList.remove('active');
-		
-		index++;
-		if (index === slides.length) index = 0;
-
-		slides[index].classList.add('active');
-
-	}, time);
-}
-
-	<div id="slideshow-example" data-component="slideshow">
-		<div role="list">
-			<div class="slide">
-				<img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=752&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
-			</div>
-			<div class="slide">
-				<img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=750&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
-			</div>
-			<div class="slide">
-				<img src="https://images.unsplash.com/photo-1498753427761-548428edfa67?w=889&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
-			</div>
-		</div>
-	</div>
-*/
 //////////////////////////////////////////////////////////////////////////////
 ///
 // BOUTON TRIER PAR
@@ -452,81 +338,6 @@ const renderSelect = () => {
     this.classList.toggle("active");
   });
 };
-//
-//trier relier
-//
-/*
-let populariteBtn = document.querySelector(".optionpopularite");
-populariteBtn.addEventListener("click", function () {
-  const popularite = document.querySelector(".onelike");
-  //affichage par ordre de préférence
-  const populariteSorted = popularite.sort();
-  console.log(populariteSorted);
-  // oui mais selon le nombre de like,
-  //.article galery(photo+like+titre) doit moove
-});
-*/
-///////////////////////////////////////////////////////////////////////////////
-//
-//relier tag aux photograph
-// on click tag exemple portrait, que les photographes
-//avec tag portrait apparaissent
-// les autres en display none
-
-//...addEventListener on click
-//if tag portrait afficher photographe === portrait
-//else display.none
-
-// likes
-
-//var myButton = document.getElementsByClassName("onelike");
-//Getting the button with "my-button" as id.
-//var myOutput = document.querySelector(".heartBtn::after");
-//Getting the id for the tag where you want to output your number
-//var startNumber = 0;
-
-/*Creating a function where it adds 1 to the startNumber variable
-for every time you click on myButton.*
-function addToNumber() {
-  //Using template literal here.
-  myOutput.innerHTML = `The current number is: ${1 + startNumber++}`;
-  /*Sets the startNumber to 1+ startNumber++.
- 	This makes it look like it starts to count from 1 and not 0
-    the first time you click the the button.*
-}
-myButton.onclick = addToNumber;*/
-// reappuyer enleve 1 like
-//let likesNumber = likes.findLikesNumber((el) => el === "number");
-//console.log(likesNumber);
-
-//const totalLikes = () => {
-//const elt = document.querySelector(".onelikes");
-//elt.setAttribute("id", "likes");
-//let allLikes = 0;
-//ph//otograph.foreach((likes) => (allLikes += likes));
-//};
-
-// compteur de like ils se remettent à 0 !!
-//
-/*
-console.log("likes", likes);
-let clicks = 0;
-function heart() {
-  clicks += 1;
-  document.getElementById("clicks").innerHTML = clicks;
-}
-function heartMinus() {
-  clicks -= 1;
-  document.getElementById("clicks").innerHTML = clicks;
-}*/
-//
-//
-// NOMBRE DE LIKES TOTAL
-//
-
-//const likes = mediasFiltered; //tous les likes de tous les photographes du site
-//console.log(likes.length);
-
 /////////////////////////////////////////////////////////////////////////////////
 //
 // FORMULAIRE
@@ -696,6 +507,7 @@ btnValidation.addEventListener("click", function (_event) {
 });
 /// FIN FORMULAIRE
 /////////////////////////////////////////////////////////////////////////////////
+// ne fonctionne pas
 var newsArr = [];
 var i = 0;
 var x = document.querySelector(".lightbox__slide");

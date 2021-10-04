@@ -86,12 +86,18 @@ const getListItemHtml = (
     <div class="price">${price}€/jour</div>
     <ul class="container_tags">
       ${tags
-        .map((tag) => ` <li><a href="index.html" class="tags">#${tag}</a></li>`)
+        .map(
+          (tag) =>
+            //` <li><a href="index.html" class="tags">#${tag}</a></li>`
+            `<li><button data-tag="${tag}" id="navportrait" class="navbutton">#${tag}</button></li>`
+        )
         .join("")}
     </ul>                              
   </div>
     `;
 };
+
+console.log;
 /* switch (tags) {
   case "portrait":
     console.log(
@@ -159,57 +165,6 @@ const addListenerButtonNav = () => {
       });
     });
   });
-
-  //1 ajouter ou retirer la classe selected sur le bouton
-
-  //2 récupérer les tags sélectionnés en se basant sur les btn select. navbar
-
-  const photograph1 = document.getElementById("243");
-  //console.log(photograph1.getAttribute("data-tags"));
-
-  //if (data - tags == dataValue) {
-  //document.styleSheets.display = "none";
-  //.split(",")
-  //}
-  //va
-
-  // let navTags = document.querySelectorAll(".navbutton");
-  // console.log(navTags); // navTags et navButtons même chose
-  // console.log(navButtons);
-  // navTags.forEach((tag) => {
-  //   if (tag === photograph2.data - tag) {
-  //   }
-  //   console.log(phot);
-  // });
-
-  const photograph2 = document.getElementById("930");
-  console.log(photograph2.getAttribute("data-tags"));
-
-  const photograph3 = document.getElementById("82");
-  console.log(photograph3.getAttribute("data-tags"));
-  const photograph4 = document.getElementById("527");
-  console.log(photograph4.getAttribute("data-tags"));
-  const photograph5 = document.getElementById("925");
-  console.log(photograph5.getAttribute("data-tags"));
-  const photograph6 = document.getElementById("195");
-  console.log(photograph6.getAttribute("data-tags"));
 };
 
-//adeventlistener if(tag portrait, events, travel, animals) = photograph mimi keel
-
 addListenerButtonNav();
-
-//____________
-//console.log(photographers[0]["tags"]); utiliser fetch !
-
-// fetch("./FishEyeData.json")
-//   .then((response) => response.json())
-//   .then((datajs1) => {
-//     console.log(datajs1.photographers);
-// photographers.tags
-
-// dataautiliser = datajs1;
-//  });
-//si on veut mettre dans un dossier par exemple quote creer ou getElement
-// on ferait apres const quote en dehors de fetch
-// quote.innerHTML = data.content
