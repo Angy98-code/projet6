@@ -57,23 +57,49 @@ const getPageProfil = (
 // PARTIE GALERIE PHOTOS
 //
 //lightbox
-const openLightbox = (id, index) => {
-  console.log(id);
+
+/////////////////////:galery plus des données plus haut
+function setupLightbox() {
+  // creer html de la lightbox , elle doit etre au depart en display none
+  const lightboxHtml = `<div class="lightbox">
+    <div class="lightbox__container">
+      <div class="lightbox__slide"><img /><video controls></video></div>
+      <div class="lightbox__prev"><i class="fas fa-chevron-left"></i></div>
+      <div class="lightbox__next"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <div class="lightbox__close"><i class="fas fa-times"></i></div>
+  </div>`;
+  // injecter au bon endroit html
+  const element = document.getElementById("lightbox");
+  element.innerHTML = lightboxHtml;
+  // fermeture gallery avec le bouton x     //ok
+  const btnCloseLightbox = document.querySelector(".lightbox__close");
+  const modallb = document.querySelector(".lightbox");
+  btnCloseLightbox.addEventListener("click", function (event) {
+    modallb.style.display = "none";
+  });
+}
+// setupLightbox(); // appeler la fonction
+
+const openLightbox = (mediaId, index) => {
+  setupLightbox();
+  console.log("openLightbox", mediaId, index);
 
   //passer la lightbox en display block
   const lightbox = document.querySelector(".lightbox");
   lightbox.style.display = "block";
   //choper la ref à l'img ds lightbox
   const image = document.querySelector(".lightbox img");
-  console.log(image);
+  console.log("image", image);
+
+  const mediaClick = mediasFiltered.find((media) => media.id === mediaId);
   //définir la src de l'img via attribut src
-  const mediaClick = mediasFiltered.find((media) => media.id === id);
   image.src = `image/${mediaClick.image}`;
 
   // POUR VIDEO, si je met video dans innerHtml les img indefined et video ne s'affiche pas
   const video = document.querySelector(".lightbox video");
   console.log(video);
-  const videoClick = mediasFiltered.find((media) => media.id === id);
+  const videoClick = mediasFiltered.find((media) => media.id === mediaId);
   video.src = `image/${videoClick.video}`;
 
   const affichageLightbox = () => {
@@ -97,8 +123,10 @@ const getPageGalery = (
   tags,
   likes,
   date,
+  price,
   index
 ) => {
+  console.log("getPageGalery", index);
   let htmlString = `<div class="articlegalery">
   <template>${id}</template>
   <template>${photographerId}</template>
@@ -110,7 +138,7 @@ const getPageGalery = (
 
   <div class="cardonlytitlelikes">
     <p>${title}</p>
-    <div class="heartbtn"> 
+    <div class="heartbtn" data-id="${id}"> 
       <span class="onelike">${likes}</span>
     </div>
   </div>
@@ -201,14 +229,6 @@ const renderHTML = () => {
   console.log(lesLikes);
 
   document.querySelector(".totallikes").innerHTML = lesLikes;
-  // il faut le for
-  const array = [1, 2, 3, 4];
-  let sum = 0;
-
-  for (let i = 0; i < array.length; i++) {
-    sum += array[i];
-  }
-  console.log(sum);
 };
 
 //
@@ -225,6 +245,7 @@ fetch("./FishEyeData.json")
     renderHTML();
     renderSelect(); // const btn trier
     //img.src = data[0].url;
+    clickOnLikes();
   });
 
 // video
@@ -233,30 +254,6 @@ fetch("./FishEyeData.json")
 const totalLikes = (likes) => {
   innerHtml;
 };
-
-/////////////////////:galery plus des données plus haut
-function setupLightbox() {
-  // creer html de la lightbox , elle doit etre au depart en display none
-  const lightboxHtml = `<div class="lightbox">
-    <div class="lightbox__container">
-      <div class="lightbox__slide"><img /><video controls></video></div>
-      <div class="lightbox__prev"><i class="fas fa-chevron-left"></i></div>
-      <div class="lightbox__next"><i class="fas fa-chevron-right"></i></div>
-    </div>
-    <div class="lightbox__close"><i class="fas fa-times"></i></div>
-  </div>`;
-  // injecter au bon endroit html
-  const element = document.getElementById("lightbox");
-  element.innerHTML = lightboxHtml;
-}
-setupLightbox(); // appeler la fonction
-
-// fermeture gallery avec le bouton x     //ok
-const btnCloseLightbox = document.querySelector(".lightbox__close");
-const modallb = document.querySelector(".lightbox");
-btnCloseLightbox.addEventListener("click", function (event) {
-  modallb.style.display = "none";
-});
 
 //////////////////////////////////////////////////////////////////////////////
 ///
@@ -506,6 +503,47 @@ btnValidation.addEventListener("click", function (_event) {
   modalbg.style.display = "none";
 });
 /// FIN FORMULAIRE
+
+// Début click likes
+
+const recalculTotalLikes = () => {
+  // likes
+  let lesLikes = 0;
+  mediasFiltered.forEach((media) => {
+    return (lesLikes += parseInt(media.likes));
+  });
+  document.querySelector(".totallikes").innerHTML = lesLikes;
+};
+
+const clickOnLikes = () => {
+  const likesElements = document.querySelectorAll(".heartbtn");
+  likesElements.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      // get media id from data-id attribute
+      const mediaId = parseInt(element.getAttribute("data-id"));
+
+      mediasFiltered = mediasFiltered.map((media) => {
+        if (media.id === mediaId) {
+          if (element.classList.contains("liked")) {
+            element.classList.remove("liked");
+            media.likes--;
+          } else {
+            element.classList.add("liked");
+            media.likes++;
+          }
+          // incrémente nombre de likes du média dans le dom
+          element.querySelector("span").innerHTML = media.likes;
+        }
+        return media;
+      });
+
+      console.log("likesElements", mediaId);
+      recalculTotalLikes();
+    });
+  });
+};
+// fin click likes
+
 /////////////////////////////////////////////////////////////////////////////////
 // ne fonctionne pas
 var newsArr = [];
@@ -537,3 +575,18 @@ function prev() {
 }
 
 ///// ______________lien tags
+
+///// ______________lien tags
+//var slide = new Array("foret-peuplier.jpg", "paysage-montagne.jpg", "chemin-automne.jpg", "prairie-alpes.jpg");
+// slide container!
+
+// var numero = 0;
+
+// function ChangeSlide(sens) {
+//     numero = numero + sens;
+//     if (numero < 0)
+//         numero = slide.length - 1;
+//     if (numero > slide.length - 1)
+//         numero = 0;
+//     document.getElementById("slide").src = slide[numero];
+// }

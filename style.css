@@ -33,7 +33,7 @@ header ul {
   list-style: none;
 }
 
-nav button {
+.navbutton {
   font-size: 12px;
   font-weight: bold;
   display: flex;
@@ -46,7 +46,7 @@ nav button {
   background-color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
-nav button.selected {
+.navbutton.selected {
   color: white;
   background-color: #901c1c;
   font-weight: 600;
@@ -1223,6 +1223,7 @@ transform: scale (1.2);
   max-width: 100%;
   height: auto;
 }
+
 /*
 .lightbx__close:before,
 .lightbox__close:after {
