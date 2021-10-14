@@ -453,10 +453,9 @@ const renderSelect = () => {
       //-----------------changer le textcontent
       // on fait une boucle sur chacune des options du select original
       for (let option of selectElt.options) {
-        console.log(selectElt.options);
+        console.log("selectElt.options", selectElt.options);
         //if les options de mon select d'origine est égal a l'élément que
         // je viens de cliquer
-        debugger;
         if (option.innerHTML === this.innerHTML) {
           // on active la bonne option dans le select
           selectElt.selectedIndex = option.index;
@@ -467,12 +466,11 @@ const renderSelect = () => {
           newSelect.innerHTML = this.innerHTML;
           console.log(newSelect);
           break;
-        } else if ((selectElt.selectedIndex = option.index)) {
-          option.innerHTML === this.innerHTML;
         }
         //apparait comme avant lors d'un nouveau click
         else {
-          selectElt.selectedIndex = selectElt.options;
+          selectElt.selectedIndex = selectElt.options.index;
+          newSelect.innerHTML = this.innerHTML;
         }
       }
 
@@ -492,10 +490,12 @@ const renderSelect = () => {
   //on ajoute event click sur newSelect
   const selectItems = document.querySelector(".select-items");
   newSelect.addEventListener("click", function (e) {
-    selectItems.style.marginTop = "-47px";
-    selectItems.firstChild.style.color = "transparent";
+    // selectItems.style.marginTop = "-47px";
+    //selectItems.firstChild.style.color = "transparent";
+    selectItems.firstChild.classList.add("fleche_haut");
     selectItems.firstChild.style.borderRadius = "5px 5px 0 0";
     selectItems.lastChild.style.borderRadius = "0 0 5px 5px";
+    selectItems.firstChild.style.backgroundColor = "orange !important";
     // if ((selectItems.firstChild.style.color = "transparent")) {
     //   selectItems.firstChild.style.color = "white";
     // }
@@ -507,6 +507,7 @@ const renderSelect = () => {
     newSelect.nextSibling.classList.toggle("select-hide");
     // on ajoute la classe active à newSelect pour changer la flèche
     newSelect.classList.toggle("active");
+
     // if (this.classList.toggle("select-hide")) {
     //   this.style.borderRadius = "5px 5px 5px 5px";
     // }

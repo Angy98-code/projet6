@@ -835,6 +835,24 @@ select {
   height: 0;
 }
 */
+
+.fleche_bas::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+.fleche_haut::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f106";
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+
 .newselecttrier::after {
   font-family: "Font Awesome 5 Free";
   content: "\f107";
@@ -871,9 +889,14 @@ select {
 }
 */
 /* evite 2 x popularité ainsi que les lignes js2 for let option*/
-.select-items div:first-child {
-  margin-top: -50px;
-  color: transparent;
+.newselecttrier.active {
+  background-color: orange !important;
+  display: none;
+}
+
+.select-itemsx div:first-child {
+  /* margin-top: -46px; */
+  /* color: transparent; */
 }
 /*
 .select-items div::after {
