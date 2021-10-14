@@ -45,14 +45,15 @@ const getPageProfil = (
   <div class="trierpar">
     <p class="triertext">Trier par</p>
       <div class="custom_select">
-        <select name="" id="">
-          <option id="option1" class="optionpopularite" value="">Popularité</option>
-          <option class="optiondate" value="1">Date</option>
-          <option class="optiontitre" value="2">Titre</option>
+        <select name="" id="sortingSelect">
+          <option id="option1" class="optionpopularite" value="popularity">Popularité<span class="flechehaut"></span></option>
+          <option class="optiondate" value="date">Date</option>
+          <option class="optiontitre" value="title">Titre</option>
         </select>
       </div>
   </div>`;
-
+// la modal trier par
+//console.log(data.mediaFiltered.likes);
 //
 // PARTIE GALERIE PHOTOS
 //
@@ -63,32 +64,37 @@ function setupLightbox() {
   // creer html de la lightbox , elle doit etre au depart en display none
   const lightboxHtml = `<div class="lightbox">
     <div class="lightbox__container">
-      <div class="lightbox__slide"><img /><video controls></video></div>
-      <div class="lightbox__prev"><i class="fas fa-chevron-left"></i></div>
-      <div class="lightbox__next"><i class="fas fa-chevron-right"></i></div>
+      <div class="slide"><img /><video controls></video></div>
+      <div class="lightbox__prev" ><i class="fas fa-chevron-left" name="prev"></i></div>
+      <div class="lightbox__next"><i class="fas fa-chevron-right" name="next"></i></div>
     </div>
     <div class="lightbox__close"><i class="fas fa-times"></i></div>
   </div>`;
+  //  ---------------SLIDE
+
   // injecter au bon endroit html
   const element = document.getElementById("lightbox");
   element.innerHTML = lightboxHtml;
-  // fermeture gallery avec le bouton x     //ok
+
+  // -------------FERMETURE LIGHTBOX
   const btnCloseLightbox = document.querySelector(".lightbox__close");
   const modallb = document.querySelector(".lightbox");
   btnCloseLightbox.addEventListener("click", function (event) {
     modallb.style.display = "none";
   });
-}
-// setupLightbox(); // appeler la fonction
+  //------------------------------------------------------------------------------
+} // -----------------------fermeture setuptLightbox
 
+// faut mettre le reste dans cette fonction n'est-il pas ?
+// car openLightbox fait appel à cette fonction donc non
 const openLightbox = (mediaId, index) => {
   setupLightbox();
-  console.log("openLightbox", mediaId, index);
 
   //passer la lightbox en display block
   const lightbox = document.querySelector(".lightbox");
   lightbox.style.display = "block";
-  //choper la ref à l'img ds lightbox
+
+  //récupérer la ref à l'img ds lightbox
   const image = document.querySelector(".lightbox img");
   console.log("image", image);
 
@@ -96,22 +102,85 @@ const openLightbox = (mediaId, index) => {
   //définir la src de l'img via attribut src
   image.src = `image/${mediaClick.image}`;
 
-  // POUR VIDEO, si je met video dans innerHtml les img indefined et video ne s'affiche pas
+  // POUR VIDEO,
   const video = document.querySelector(".lightbox video");
   console.log(video);
   const videoClick = mediasFiltered.find((media) => media.id === mediaId);
   video.src = `image/${videoClick.video}`;
 
   const affichageLightbox = () => {
-    if (img === img) {
-      return img;
+    //cette fonction doit apparaitre
+    //dans le addeventlistener non ?
+    if (image === image) {
+      return image;
     } else if (video === video) {
       return video;
     }
   };
-  // image.src.mp4 = `image/${mediaClick.video}`;
-  //!!!!! manque pour video
-};
+
+  /////////////////SLIDER A METTRE ICI
+  // //autre exemple
+  //const arraySlide = mediasFiltered;
+  // const slideImageVideo = document.querySelector(".slide"); //???
+  const buttonNext = document.querySelector("div.lightbox__next");
+  const buttonPrev = document.querySelector("div.lightbox__prev");
+  let i = 0; //current image or video
+  // const image2 = document.querySelector("div.lightbox img video");
+  //const arrayImageVideo ?????
+
+  //const btnCloseLightbox = document.querySelector(".lightbox__close");
+  modallb = document.querySelector(".lightbox"); //close modal ici pour exemple
+  // btnCloseLightbox.addEventListener("click", function (event) {
+  buttonNext.addEventListener("click", function (event) {
+    i++;
+    //add 1 to current index
+    if (i > mediaClick.length - 1) {
+      //? mediasFiltered (arrayphoto)
+      //if current index passes last photo in array
+      i = 0;
+      //     //set index back to zero
+    }
+
+    //video.src = mediasFiltered[i]; //mediaclick ne fonctionne pas
+    image.src = mediaClick[i];
+    //video.src = videoClick[i]; //ca bouge un peu mais ne fonctionne pas
+    console.log("mediaClick", mediaClick);
+    //??? (photo !!)non pas slideimagevideo
+    //attention j'ai image et video !!!!
+    //   //set slide to current index
+  });
+  buttonPrev.addEventListener("click", function (event) {
+    modallb.style.display = "none";
+  });
+}; // ---------------fermeture openLightbox
+
+//autre exemple
+// var i = 0;
+
+// function ChangeSlide(sens) {
+//     i = i + sens;
+//     if (numero < 0)
+//         numero = slide.length - 1;
+//     if (numero > slide.length - 1)
+//         numero = 0;
+//     document.getElementById("slide").src = slide[numero];
+// }
+
+//previous slide
+// const goPreviousMedia = () => {
+//   if (indexCurrentMedia > 0) indexCurrentMedia--;
+//   else indexCurrentMedia = mediasFiltered.length - 1;
+
+//   createNewMedia();
+// };
+
+// //next slide
+// const goNextPhotoMedia = () => {
+//   if (indexCurrentMedia < media.length - 1) indexCurrentMedia++;
+//   else indexCurrentMedia = 0;
+
+//   createNewMedia();
+// };
 
 // array galery
 const getPageGalery = (
@@ -159,7 +228,6 @@ const getPageGalery = (
   }
   return htmlString;
 };
-
 //
 const renderHTML = () => {
   const queryString_url_id = window.location.search;
@@ -195,6 +263,12 @@ const renderHTML = () => {
     photograph.price,
     photograph.portrait
   );
+  //1er a enlever
+  // const sortingSelect = document.querySelector("#sortingSelect");
+  // console.log(sortingSelect);
+  // sortingSelect.addEventListener("change", (event) => {
+  //   console.log(event.target.value);
+  // });
 
   const mediasFilteredHtml = mediasFiltered
     .map((media, index) =>
@@ -243,6 +317,7 @@ fetch("./FishEyeData.json")
     console.log(dataFetch);
     data = dataFetch;
     renderHTML();
+    setupLightbox();
     renderSelect(); // const btn trier
     //img.src = data[0].url;
     clickOnLikes();
@@ -259,6 +334,9 @@ const totalLikes = (likes) => {
 ///
 // BOUTON TRIER PAR
 //
+
+//
+
 const renderSelect = () => {
   // on récupère le select
   const selectElt = document.querySelector("select");
@@ -267,8 +345,10 @@ const renderSelect = () => {
   const selectDiv = document.querySelector(".custom_select");
   //on cree le nouveau select une nouvelle div
   const newSelect = document.createElement("div");
+
   //on lui ajoute la class newselect
   newSelect.classList.add("newselecttrier");
+
   //on lui met le contenu
   newSelect.innerHTML = selectElt.options[selectElt.selectedIndex].innerHTML;
 
@@ -292,25 +372,112 @@ const renderSelect = () => {
     newOption.innerHTML = option.innerHTML;
     // on ajoute après avoir fait la deuxième fleche
     //un ecouteur d'évenement click pour les options
-    newOption.addEventListener("click", function () {
-      // on fait une boucle sur chacune des options du select original
-      // cad relier ce qui est cliqué  option n'est pas la mm qu'au dessus
-      // on refait une boucle
-      //for (let option of selectElt.options) {
-      // if les options de mon select d'origine est égal a l'élément que
-      // je viens de cliquer
-      //if (option.innerHTML === this.innerHTML) {
-      // on active la bonne option dans le select !!!! moi ca ne fonctionne pas  au niveau console!!!
-      //selectElt.selectedIndex = option.index;
-      //on change le texte pour le mettre en haut
+    newOption.addEventListener("click", function (event) {
+      event.stopPropagation();
+      const sortValue = event.target.textContent;
+      const mediasBeforeSort = [...mediasFiltered];
+      //retrier les éléments photo en fonction event target
+      if (sortValue === "Popularité") {
+        //trier par popularité les médias et les réafficher
+        mediasFiltered.sort((a, b) => {
+          // console.log(a, b);
+          if (a.likes < b.likes) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
 
-      // une fois que j'ai trouvé la bonne pas la peine d'aller plus loin
-      // on met sur le menu sur ce que l'on clique
-      //newSelect.innerHTML = this.innerHTML;
-      //break;
-      //    }
-      //  }
+        console.log(
+          "pour les likes mediasFiltered, mediasBeforeSort",
+          mediasFiltered,
+          mediasBeforeSort
+        );
+      } else if (sortValue === "Date") {
+        //trier par date
+        mediasFiltered.sort((a, b) => {
+          // console.log(a, b);
+          if (a.date < b.date) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        console.log(
+          "pour les dates mediasFiltered, mediasBeforeSort",
+          mediasFiltered,
+          mediasBeforeSort
+        );
+      } else if (sortValue === "Titre") {
+        //trier par titre
+        mediasFiltered.sort((a, b) => {
+          // console.log(a, b);
+          if (a.title > b.title) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        console.log(
+          "pour les dates mediasFiltered, mediasBeforeSort",
+          mediasFiltered,
+          mediasBeforeSort
+        );
+      }
+
+      // on remet le même code qu'au dessus pour le trie, faire une fonction serait mieux
+      const mediasFilteredHtml = mediasFiltered
+        .map((media, index) =>
+          getPageGalery(
+            media.id,
+            media.photographerId,
+            media.title,
+            media.image,
+            media.video,
+            media.tags,
+            media.likes,
+            media.date,
+            media.price,
+            index
+          )
+        )
+        .join("");
+      const elementContainerGallery =
+        document.getElementById("articlephotograph");
+      elementContainerGallery.innerHTML = mediasFilteredHtml; // elementContainerGallery est la référence vers l'élément dans lequel tu veux afficher tes photos.
+      //fin du code repris
+      //modifier le textcontent du bouton du filtre
+      //date si click, likes  etc.
+      //
+      //
+      //-----------------changer le textcontent
+      // on fait une boucle sur chacune des options du select original
+      for (let option of selectElt.options) {
+        console.log(selectElt.options);
+        //if les options de mon select d'origine est égal a l'élément que
+        // je viens de cliquer
+        debugger;
+        if (option.innerHTML === this.innerHTML) {
+          // on active la bonne option dans le select
+          selectElt.selectedIndex = option.index;
+          //on change le texte pour le mettre en haut
+
+          // une fois que j'ai trouvé le bon textcontent pas la peine d'aller plus loin
+          // on met sur le menu sur ce que l'on clique
+          newSelect.innerHTML = this.innerHTML;
+          console.log(newSelect);
+          break;
+        } else if ((selectElt.selectedIndex = option.index)) {
+          option.innerHTML === this.innerHTML;
+        }
+        //apparait comme avant lors d'un nouveau click
+        else {
+          selectElt.selectedIndex = selectElt.options;
+        }
+      }
+
       // apres la boucle for on simule un click sur newSelect
+
       // ca va fermer le menu
       newSelect.click();
     });
@@ -323,189 +490,33 @@ const renderSelect = () => {
 
   selectDiv.appendChild(newMenu);
   //on ajoute event click sur newSelect
-
+  const selectItems = document.querySelector(".select-items");
   newSelect.addEventListener("click", function (e) {
-    //this.style.display="none";
-    //on empêche la propagation du click
+    selectItems.style.marginTop = "-47px";
+    selectItems.firstChild.style.color = "transparent";
+    selectItems.firstChild.style.borderRadius = "5px 5px 0 0";
+    selectItems.lastChild.style.borderRadius = "0 0 5px 5px";
+    // if ((selectItems.firstChild.style.color = "transparent")) {
+    //   selectItems.firstChild.style.color = "white";
+    // }
+
+    // empêche la propagation du click
     e.stopPropagation();
     // on retire le select hide de notre menu
     // on cherche la balise suivante
-    this.nextSibling.classList.toggle("select-hide");
+    newSelect.nextSibling.classList.toggle("select-hide");
     // on ajoute la classe active à newSelect pour changer la flèche
-    this.classList.toggle("active");
+    newSelect.classList.toggle("active");
+    // if (this.classList.toggle("select-hide")) {
+    //   this.style.borderRadius = "5px 5px 5px 5px";
+    // }
+    // } // permet le bon affichage mais manque le flèche
   });
 };
-/////////////////////////////////////////////////////////////////////////////////
-//
-// FORMULAIRE
-//
-// DOM Elements bouton je m'inscris modalbtn !!! c'est le button de chaque page
 
-const modalBtn = document.querySelectorAll(".modal-btn");
-//lauch modal
-// launch modal (bouton je m'inscris) évenement du formulaire au click
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-// apparition de la launchModal formulaire d'inscription
-function launchModal() {
-  modalbg.style.display = "block";
-}
-// bouton fermeture croix x
-const btnClose = document.querySelector("#closebtn");
-const modalbg = document.querySelector(".bground");
-btnClose.addEventListener("click", function (event) {
-  modalbg.style.display = "none";
-});
-
-//1ER CHAMP PRENOM
-const validateFirst = (event) => {
-  // event.preventDefault();
-  const nameInput = document.getElementById("firstname"); // name field
-  const valueNameInput = nameInput.value; //value field
-  const nameRegex = /^[A-ZÇÉÈÊËÀÂÎÏÔÙÛa-zçéèêëàâîïôùû_\-\.\ ]+$/;
-  let errorText = document.getElementById("texterrorfirstname");
-
-  if (valueNameInput.length < 2) {
-    errorText.innerHTML =
-      "Merci d'entrer au minimum 2 caractères pour le champ du prénom.";
-    return false;
-  } else if (
-    nameRegex.test(nameInput.value) === true && ///erreur si valueNameInput!!!!!!!
-    valueNameInput.length >= 2
-  ) {
-    errorText.innerHTML = "";
-    return true;
-  } else {
-    errorText.innerHTML = "Merci d'indiquer un prénom";
-    return false;
-  }
-};
-
-//2EME CHAMP NOM
-const validateLast = (_event) => {
-  //  event.preventDefault();
-  const lastNameInput = document.getElementById("lastname");
-  const valueLastNameInput = lastNameInput.value;
-  const lastNameRegex = /^[A-ZÇÉÈÊËÀÂÎÏÔÙÛa-zçéèêëàâîïôùû_\-\.\ ]+$/;
-  let errorText = document.getElementById("texterrorlastname");
-
-  if (valueLastNameInput.length < 2) {
-    errorText.innerHTML =
-      "Merci d'entrer au minimum 2 caractères pour le champ du nom.";
-    return false;
-  } else if (
-    lastNameRegex.test(lastNameInput.value) == true && ///erreur si valueNameInput!!!!!!!
-    valueLastNameInput.length >= 2
-  ) {
-    errorText.innerHTML = "";
-    return true;
-  } else {
-    errorText.innerHTML = "Merci d'indiquer un nom";
-    return false;
-  }
-};
-
-//3EME CHAMP EMAIL
-const validateEmail = (_event) => {
-  // event.preventDefault();
-  let errorText = document.getElementById("texterroremail");
-  const nameInputEmail = document.getElementById("email");
-  const valueNameInputEmail = nameInputEmail.value;
-  const emailFormat = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
-  // /^\A(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])\z$/;
-
-  if (valueNameInputEmail == "") {
-    //textEmail = document.getElementById("texterroremail").textContent;
-    //document.getElementById("texterroremail").textContent =
-    errorText.innerHTML = "Merci de renseigner une adresse email valide.";
-    return false;
-  } else if (!emailFormat.test(valueNameInputEmail)) {
-    document.getElementById("texterroremail").textContent =
-      "Adresse email incorrect. ";
-    return false;
-  } else {
-    document.getElementById("texterroremail").textContent = "";
-    return true;
-  }
-};
-
-//4EME CHAMP TEXTAREA
-
-const validateMessage = (_event) => {
-  //let eltTextarea = document.querySelector("message");
-  //eltTextarea.spellcheck = false;
-  //eltTextarea.addEventListener("keyup", function () {
-  //eltTextarea.value = eltTextarea.value.substring(0, 203);
-  //});
-
-  const messageInput = document.getElementById("message");
-  // messageInput.value = messageInput.value.substring(0, 203);
-  const valueMessageInput = messageInput.value;
-  let errorText = document.getElementById("texterrormessage");
-
-  if (valueMessageInput.length < 2) {
-    errorText.innerHTML = "Merci d'entrer votre message.";
-    return false;
-  } else if (valueMessageInput.length > 2) {
-    errorText.innerHTML = "";
-
-    return true;
-  }
-};
-
-//
-// FONCTION DE VALIDATION
-
-const validate = () => {
-  const isFirstNameValid = validateFirst();
-  const isLastNameValid = validateLast();
-  const isEmailValid = validateEmail();
-  const isMessageValid = validateMessage();
-
-  return isFirstNameValid && isLastNameValid && isEmailValid && isMessageValid;
-};
-
-//
-// FONCTIONS ENVOI DU FORMULAIRE ET MESSAGE DE REMERCIEMENT
-//
-document
-  .getElementById("inscription")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // on le met si erreur afin de ne pas envoyé le formulaire
-
-    if (validate(event)) {
-      //const messageValidation = document.getElementById("submitMessage");
-      // messageValidation.style.display = "none";
-      // block
-      const messageValidation = document.getElementById("submitMessage");
-      messageValidation.style.display = "block";
-      const form = document.getElementById("inscription");
-      form.style.display = "none";
-      console.log({
-        prénom: "isFirstNameValid",
-        nom: "isLastNameValid",
-        email: "isEmailValid",
-        message: "isMessageValid",
-      });
-    }
-  });
-//
-document
-  .getElementById("inscription")
-  .addEventListener("input", function (event) {
-    //event.preventDefault();
-    validate(event);
-  });
-
-//
-// BOUTON FERMETURE APRES INSCRIPTION
-const btnValidation = document.getElementById("btn-validation");
-btnValidation.addEventListener("click", function (_event) {
-  modalbg.style.display = "none";
-});
-/// FIN FORMULAIRE
-
-// Début click likes
-
+//  fin trier par
+// -----------------------Début click likes
+//console.log(media.likes);
 const recalculTotalLikes = () => {
   // likes
   let lesLikes = 0;
@@ -545,48 +556,3 @@ const clickOnLikes = () => {
 // fin click likes
 
 /////////////////////////////////////////////////////////////////////////////////
-// ne fonctionne pas
-var newsArr = [];
-var i = 0;
-var x = document.querySelector(".lightbox__slide");
-var timeoutId;
-function next() {
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-  }
-  i++;
-  if (i < newsArr.length) {
-    x.innerHTML = newsArr[i];
-  } else {
-    i = 0;
-    x.innerHTML = newsArr[i];
-  }
-  timeoutId = setTimeout(next, 2000);
-}
-
-function prev() {
-  i--;
-  if (i >= 0) {
-    x.innerHTML = newsArr[i];
-  } else {
-    i = newsArr.length - 1;
-    x.innerHTML = newsArr[i];
-  }
-}
-
-///// ______________lien tags
-
-///// ______________lien tags
-//var slide = new Array("foret-peuplier.jpg", "paysage-montagne.jpg", "chemin-automne.jpg", "prairie-alpes.jpg");
-// slide container!
-
-// var numero = 0;
-
-// function ChangeSlide(sens) {
-//     numero = numero + sens;
-//     if (numero < 0)
-//         numero = slide.length - 1;
-//     if (numero > slide.length - 1)
-//         numero = 0;
-//     document.getElementById("slide").src = slide[numero];
-// }

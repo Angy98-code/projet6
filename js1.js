@@ -89,7 +89,7 @@ const getListItemHtml = (
         .map(
           (tag) =>
             //` <li><a href="index.html" class="tags">#${tag}</a></li>`
-            `<li><button data-tag="${tag}" id="navportrait" class="navbutton">#${tag}</button></li>`
+            `<li><button data-tag="${tag}"  class="navbutton">#${tag}</button></li>`
         )
         .join("")}
     </ul>                              
@@ -132,21 +132,38 @@ console.log(photographArray);
 
 //console.log({ tags });
 // fonction récupére chaque button addeventlistener sur chacun
+//côté tag du nav
 const addListenerButtonNav = () => {
   const navButtons = document.querySelectorAll(".navbutton");
+  console.log(navButtons);
   navButtons.forEach((buttonElement) => {
     buttonElement.addEventListener("click", () => {
       const tagValue = buttonElement.getAttribute("data-tag");
+
       if (buttonElement.classList.contains("selected")) {
         buttonElement.classList.remove("selected");
         selectedTags = selectedTags.filter((tag) => tag !== tagValue);
+        //selectedTags.pop(tagValue);
+        //
       } else {
         buttonElement.classList.add("selected");
+        //selectedTags = selectedTags.filter((tag) => tag === tagValue);
+
+        //ajouter les tags sélectionnés en html et en js
         selectedTags.push(tagValue);
+        //chercher le nom des autres et faire push(tagValue)
+
+        // ne fonctionne pas  buttonElement.style.backgroundColor = "red";
       }
       console.log("selectedTags", selectedTags);
+
+      //selectedTags = selectedTags.filter((tag) => tag == tagValue);
+      // if (tag === tagValue) {
+      // selectedTags.style.color = "red";
+      // }
       //boucler dans les photographes et sélectionner ceux qui ont tous
       //les tags de selectedTags
+      //tag des photographes dans bloc photograph
       const photographElements = document.querySelectorAll(".listitem");
       photographElements.forEach((photograph) => {
         const photographTagsString = photograph.getAttribute("data-tags");
@@ -159,12 +176,49 @@ const addListenerButtonNav = () => {
         // si le photagraph a bien les tags sélectionnés dans ses tags => display block sinon none
         if (isAllTagsSelectedIncluded) {
           photograph.style.display = "block";
+          photograph.classList.add("selected");
+          //récupérer les elements tag du photographe
+
+          //selectedTags = selectedTags.filter((tag) => tag === tagValue);
+          //
         } else {
           photograph.style.display = "none";
+          photograph.classList.remove("selected");
         }
+      });
+      //refaire pour les tag et non bloc photograph
+      //tag des photographes
+      const photographElementsTag = document.querySelectorAll(".navbutton");
+      photographElementsTag.forEach((tagphotograph) => {
+        const photographTagsStringTag = tagphotograph.getAttribute("data-tag");
+        console.log(photographTagsStringTag);
+        // const photographTagsArrayTag = photographTagsStringTag.split(",");
+        const isTagSelected = selectedTags.includes(photographTagsStringTag);
+        console.log(selectedTags, isTagSelected);
+        if (isTagSelected) {
+          tagphotograph.classList.add("selected");
+          // selectedTags.push(tagValue);
+        } else {
+          tagphotograph.classList.remove("selected");
+
+          //   selectedTags = selectedTags.filter((tag) => tag !== tagValue);
+        }
+        // if (this.classList.contains)
+        // if (selectedTags !== null) {
+        //   buttonElement.classList.remove("selected");
+        // }
+        // // if (photographs.classList.contains("selected")) {
+        //   photographs.classList.remove("selected");
+        //   selectedTags = selectedTags.filter((tag) => tag !== tagValue);
+
+        // }
       });
     });
   });
 };
 
 addListenerButtonNav();
+
+// if (navportrait === selected) {
+//   navButtons.style.backgroundolor = "red";
+// }
