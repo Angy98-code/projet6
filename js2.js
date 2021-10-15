@@ -46,7 +46,7 @@ const getPageProfil = (
     <p class="triertext">Trier par</p>
       <div class="custom_select">
         <select name="" id="sortingSelect">
-          <option id="option1" class="optionpopularite" value="popularity">Popularité<span class="flechehaut"></span></option>
+          <option id="option1" class="optionpopularite" value="popularity">Popularité</option>
           <option class="optiondate" value="date">Date</option>
           <option class="optiontitre" value="title">Titre</option>
         </select>
@@ -478,6 +478,7 @@ const renderSelect = () => {
 
       // ca va fermer le menu
       newSelect.click();
+      clickOnLikes(); // après le bloc "trier par", pour que cela fonctionne ajoute, enlève likes +
     });
 
     // on ajoute l'option dans le newMenu
@@ -518,6 +519,7 @@ const renderSelect = () => {
 //  fin trier par
 // -----------------------Début click likes
 //console.log(media.likes);
+
 const recalculTotalLikes = () => {
   // likes
   let lesLikes = 0;
@@ -543,6 +545,7 @@ const clickOnLikes = () => {
             element.classList.add("liked");
             media.likes++;
           }
+
           // incrémente nombre de likes du média dans le dom
           element.querySelector("span").innerHTML = media.likes;
         }

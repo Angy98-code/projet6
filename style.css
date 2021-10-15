@@ -894,10 +894,10 @@ select {
   display: none;
 }
 
-.select-itemsx div:first-child {
+/* .select-itemsx div:first-child {
   /* margin-top: -46px; */
-  /* color: transparent; */
-}
+/* color: transparent; */
+
 /*
 .select-items div::after {
   content: "";
@@ -1272,4 +1272,24 @@ transform: scale (1.2);
   height: 38px;
   opacity: 0.5;
   background: url(img/loader.svg) center center no-repeat;
+}
+
+/*@media screen and (min-width: 909px) {*/
+.listitem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+@media screen and (min-width: 646px) {
+  .listitem {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 909px) {
+  .listitem {
+    display: flex;
+    width: 33%;
+
+    flex-direction: column;
+  }
 }
