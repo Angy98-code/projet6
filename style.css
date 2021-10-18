@@ -24,7 +24,7 @@ body {
   padding: 0;
   color: #901c1c;
 }
-header ul {
+header span {
   padding-top: 28px;
   display: flex;
   flex-wrap: wrap;
@@ -37,6 +37,7 @@ header ul {
   font-size: 12px;
   font-weight: bold;
   display: flex;
+  cursor: pointer;
   padding: 5px 8px 5px 8px;
   margin: 5px;
   text-decoration: none;
@@ -83,6 +84,7 @@ section img {
 section H2 {
   padding: 20px 0 5px 0;
   color: #d3573c;
+  cursor: pointer;
   font-size: 36px;
   font-weight: 200;
 }
@@ -101,7 +103,7 @@ section H2 {
   font-size: 11px;
   font-weight: 100;
 }
-ul.container_tags {
+.container_tags {
   padding: 10px 0 15px 0;
   list-style-type: none;
   display: flex;
@@ -1292,4 +1294,26 @@ transform: scale (1.2);
 
     flex-direction: column;
   }
+}
+
+.textHautHomepageAccessibilité {
+  position: fixed;
+  display: none;
+  top: 5px;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-45%);
+  font-weight: 600;
+  color: black;
+  background: #d3573c;
+  width: 190px;
+  height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 7px 0 0 0;
+  text-decoration: none;
+}
+.textHautHomepageAccessibilité:hover {
+  color: #fff;
+  background: #d3573c;
 }

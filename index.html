@@ -12,11 +12,13 @@
 </head>
 
 <body>
-    <header class="header" role="banner">
-        <a aria-label="Fisheye photographes"><img role="img" src="Logo.png" id="logo" /> </a>
-        <nav role="navigation" aria-label="main navigation">
+    <header class="header" id="banner" aria-current="page" aria-hidden="false">
+        <a href="#Fisheye Home Page" alt="Fisheye Home Page"><img src="Logo.png" id="logo" role="img" /> </a>
+        <nav>
             <div id="list_nav">
-                <ul>
+                <a href="index.html#banner" class="textHautHomepageAccessibilité" title="Passer au contenu"
+                    id="link1">Passer au contenu</a>
+                <span aria-label="Tag">
                     <li> <button data-tag="portrait" id="navportrait" class="navbutton">#Portrait</button></li>
                     <li> <button data-tag="art" id="navart" class="navbutton">#Art</button></li>
                     <li> <button data-tag="fashion" id="navfashion" class="navbutton">#Fashion</button></li>
@@ -26,15 +28,15 @@
                     <li> <button data-tag="sport" id="navsport" class="navbutton">#Sport</button></li>
                     <li> <button data-tag="animals" id="navanimals" class="navbutton">#Animals</button></li>
                     <li> <button data-tag="events" id="navevents" class="navbutton">#Events</button></li>
-                </ul>
+                </span>
             </div>
         </nav>
     </header>
 
     <main>
-        <h1 class="titre_principale_main">Nos photographes</h1>
+        <h1 class="titre_principale_main" aria-labelledby="Title the photographs">Nos photographes</h1>
         <section>
-            <div id="list_container">
+            <div id="list_container" aria-label="photographers">
             </div>
         </section>
     </main>

@@ -16,42 +16,43 @@ const getPageProfil = (
   portrait
 ) =>
   `<div class="partie1profilphotograph">
-    <div><h2 class="h2photograph">${name}</h2></div>
+    <div><h2 class="h2photograph" aria-label="presentation">${name}</h2></div>
     <template class="id">${id}</template>
+    <div aria-label="paragraph presentation">
     <div class="city_country">${city}, ${country}</div>
     <div class="taglinephotograph">${tagline}</div>
-    
+    </div>
     <ul class="container_photographtags">
       ${tags
         .map(
           (tag) =>
-            `<li><a href="index.html" class="tagsphotograph">#${tag}</a></li>`
+            `<span><a href="index.html" class="tagsphotograph" aria-label="Tag">#${tag}</a></span>`
         )
         .join("")}
     </ul>                               
         
   <div class="taillephotographiphone">
-    <img src="image/${portrait}" id="portraitphotograph"/>       
+    <img src="image/${portrait}" id="portraitphotograph" alt=""/>       
   </div>
 
-    <div class="priceEachOne">
+    <div class="priceEachOne" aria-label="text">
     <div class="totallikes"></div>
       <div class="totalprice">${price}€ / jour</div>
     </div>
   
   </div>        
 
-<article id="articlephotograph"></article>
+<article id="articlephotograph" aria-hidden="false"></article>
   <div class="trierpar">
-    <p class="triertext">Trier par</p>
+    <p class="triertext" aria-label="input label">Trier par</p>
       <div class="custom_select">
-        <select name="" id="sortingSelect">
+        <select name="" id="sortingSelect" aria-labelledby="Order by">
           <option id="option1" class="optionpopularite" value="popularity">Popularité</option>
           <option class="optiondate" value="date">Date</option>
           <option class="optiontitre" value="title">Titre</option>
         </select>
       </div>
-  </div>`;
+  </div aria-hidden="true">`;
 // la modal trier par
 //console.log(data.mediaFiltered.likes);
 //
@@ -62,14 +63,15 @@ const getPageProfil = (
 /////////////////////:galery plus des données plus haut
 function setupLightbox() {
   // creer html de la lightbox , elle doit etre au depart en display none
-  const lightboxHtml = `<div class="lightbox">
-    <div class="lightbox__container">
-      <div class="slide"><img /><video controls></video></div>
-      <div class="lightbox__prev" ><i class="fas fa-chevron-left" name="prev"></i></div>
-      <div class="lightbox__next"><i class="fas fa-chevron-right" name="next"></i></div>
-    </div>
-    <div class="lightbox__close"><i class="fas fa-times"></i></div>
-  </div>`;
+  const lightboxHtml = `<div class="lightbox" aria-hidden="false">
+    <div class="lightbox__container" aria-label="image closeup view">
+      <div class="slide"><img aria-label="Lilac breasted roller"/><video controls aria-label="Lilac breasted roller"></video></div>
+      <div class="lightbox__prev" aria-label="Previous image"><i class="fas fa-chevron-left" name="prev"></i></div>
+      <div class="lightbox__next" aria-label="Next image"><i class="fas fa-chevron-right" name="next"></i></div>
+   <div class="titrePhotoDansCarousel" aria-label="Title from media"></div>
+      </div>
+    <div class="lightbox__close" aria-label="Close dialog"><i class="fas fa-times"></i></div>
+  </div aria-hidden="true">`;
   //  ---------------SLIDE
 
   // injecter au bon endroit html
@@ -205,20 +207,20 @@ const getPageGalery = (
   #bloctoreplace
   </div>
 
-  <div class="cardonlytitlelikes">
-    <p>${title}</p>
+  <div class="cardonlytitlelikes" >
+    <p aria-label="text">${title}</p>
     <div class="heartbtn" data-id="${id}"> 
-      <span class="onelike">${likes}</span>
+      <span class="onelike" aria-label="likes">${likes}</span>
     </div>
   </div>
   
   <template class="date">${date}</template>
   </div>`;
-  const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt=""/><template>${image}</template>
+  const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="photograph image" role="img"/><template>${image}</template>
     </div>
   `;
 
-  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt=""/><template>${video}</template>
+  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="photograph video" role="video"/><template>${video}</template>
     </div>
   `;
   if (video) {
@@ -229,6 +231,7 @@ const getPageGalery = (
   return htmlString;
 };
 //
+
 const renderHTML = () => {
   const queryString_url_id = window.location.search;
   const urlSearchParams = new URLSearchParams(queryString_url_id);
@@ -514,7 +517,7 @@ const renderSelect = () => {
     // }
     // } // permet le bon affichage mais manque le flèche
   });
-};
+}; // fin de la fonction renderSelect pour la dropdown
 
 //  fin trier par
 // -----------------------Début click likes
@@ -560,3 +563,129 @@ const clickOnLikes = () => {
 // fin click likes
 
 /////////////////////////////////////////////////////////////////////////////////
+//-------------------IMPORTANT ACCESSIBILITE
+
+// Func
+//pour modal
+/*
+const onOpenModal = () => {
+   $mainWrapper.attr('aria-hidden', 'true')
+   $modal.attr('aria-hidden', 'false')
+   $body.addClass('no-scroll')
+   $modal.css('display', 'flex')
+   $modalCloseBtn.focus()
+}
+ 
+const onCloseModal = () => {
+   $mainWrapper.attr('aria-hidden', 'false')
+   $modal.attr('aria-hidden', 'true')
+   $body.removeClass('no-scroll')
+   $modal.css('display', 'none')
+   $openModalBtn.focus()
+}
+
+le focus sur le bouton d’ouverture ou de fermeture de la modale ;
+
+la gestion des touches clavier, et notamment la touche “Esc”.
+
+const onOpenModal = () => {
+   $mainWrapper.attr('aria-hidden', 'true')
+   $modal.attr('aria-hidden', 'false')
+   $body.addClass('no-scroll')
+   $modal.css('display', 'flex')
+   $modalCloseBtn.focus()
+}
+Quand la modale s’ouvre, en plus de mettre à jour les attributs `aria-hidden`, nous mettons le focus sur le bouton de fermeture de la modale (ce qui permet de la fermer avec la barre “espace”.)
+
+// Close modal when escape key is pressed
+$(document).on('keydown', e => {
+   const keyCode = e.keyCode ? e.keyCode : e.which
+ 
+   if ($modal.attr('aria-hidden') == 'false' && keyCode === 27) {
+       onCloseModal()
+   }
+})
+
+Ici, via le JavaScript, nous écoutons les touches du clavier pour pouvoir fermer la modale quand la touche Esc   est pressée.
+
+
+// pour caroussel
+
+$(document).keydown(function(e) {
+   const keyCode = e.keyCode ? e.keyCode : e.which
+ 
+   if (keyCode === 39) {
+       goToNextSlide()
+   } else if (keyCode === 37) {
+       goToPreviousSlide()
+   }
+})
+ 
+$carouselPauseBtn.on('click', function() {
+   clearInterval(carouselInterval)
+})
+$(document).keydown(function(e) {
+   const keyCode = e.keyCode ? e.keyCode : e.which
+ 
+   if (keyCode === 39) {
+       goToNextSlide()
+   } else if (keyCode === 37) {
+       goToPreviousSlide()
+   }
+})
+ 
+$carouselPauseBtn.on('click', function() {
+   clearInterval(carouselInterval)
+})
+
+$(document).keydown(function(e) {
+   const keyCode = e.keyCode ? e.keyCode : e.which
+ 
+   if (keyCode === 39) {
+       goToNextSlide()
+   } else if (keyCode === 37) {
+       goToPreviousSlide()
+   }
+})
+ 
+$carouselPauseBtn.on('click', function() {
+   clearInterval(carouselInterval)
+})
+$(document).keydown(function(e) {
+   const keyCode = e.keyCode ? e.keyCode : e.which
+ 
+   if (keyCode === 39) {
+       goToNextSlide()
+   } else if (keyCode === 37) {
+       goToPreviousSlide()
+   }
+})
+ 
+$carouselPauseBtn.on('click', function() {
+   clearInterval(carouselInterval)
+})
+
+D’ailleurs, concernant les contrôles, notez qu’ils sont masqués visuellement, mais sont affichés pour les technologies d'assistance.
+
+<div role="button" class="controls controls-left">
+   <span class="img prev-image">
+       <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
+   </span>
+   <p class="sr-only">Previous</p>
+</div>
+De la même façon, chacun des items du carrousel dispose d’un attribut  aria-hidden  . 
+
+Ce dernier est changé via le JavaScript ici :
+
+const setNodeAttributes = (lastItem, currentItem) => {
+   $(lastItem).css('display', 'none')
+   $(currentItem).css('display', 'block')
+   $(lastItem).attr('aria-hidden', 'true')
+   $(currentItem).attr('aria-hidden', 'false')
+}
+Ce script permet de mettre :
+
+un  display: none;  à l’élément qui vient d’être affiché, et passe l’attribut  aria-hidden  à true ;
+
+un  display: block;  à l’élément qui est affiché.
+*/

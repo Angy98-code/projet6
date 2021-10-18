@@ -17,7 +17,7 @@ const photographArray = [
     country: "France",
     tagline: "Capturer des compositions complexes",
     price: 250,
-    tags: ["sports", "architecture"],
+    tags: ["sport", "architecture"],
   },
   {
     portrait: "TracyGalindo.jpg",
@@ -78,13 +78,16 @@ const getListItemHtml = (
 
   return `
 <div id="${id}" data-tags="${tags}" class="listitem">
-<a href="index2.html?photographId=${id}" id="link${id}" class="portrait"><img src="image/${portrait}"/></a>        
-<h2 class="name">${name}</h2>
+<div class="accessibiliterefaitportrait">
+<a href="index2.html?photographId=${id}" id="link${id}" class="portrait"><img src="image/${portrait}"/ alt="" aria-label="${name}"></a>        
+<h2 class="name">${name}</h2></div>
     <template class="id">${id}</template>
+    <div aria-label="paragraph presentation">
     <div class="city_country">${city}, ${country}</div>
     <div class="tagline">${tagline}</div>
     <div class="price">${price}€/jour</div>
-    <ul class="container_tags">
+    </div>
+    <span class="container_tags" aria-label="Tag">
       ${tags
         .map(
           (tag) =>
@@ -92,7 +95,7 @@ const getListItemHtml = (
             `<li><button data-tag="${tag}"  class="navbutton">#${tag}</button></li>`
         )
         .join("")}
-    </ul>                              
+    </span>                              
   </div>
     `;
 };
@@ -222,3 +225,16 @@ addListenerButtonNav();
 // if (navportrait === selected) {
 //   navButtons.style.backgroundolor = "red";
 // }
+//---------------TEXT HAUT HOMEPAGE ACCESSIBILITE
+//apparait si scroll
+
+// window.onscroll = function (ev) {
+//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//     // you're at the bottom of the page
+//     textHautHomepageAccessibilité.style.display = "block";
+//   }
+// };
+window.addEventListener("scroll", (myScript) => {
+  document.querySelector(".textHautHomepageAccessibilité").style.display =
+    "block";
+});

@@ -18,27 +18,28 @@
         <!--LOGO-->
         <header class="headerphotograph">
             <div id="logophotograph">
-                <img src="Logo.png" id="logophotograph" />
+                <a href="index.html#Fisheye Home Page" aria-label="back homepage"><img src="Logo.png" role="img"
+                        alt="logo fisheye back home page" id="logophotograph" /></a>
             </div>
         </header>
         <!--présentation profil photograph-->
         <main class="mainphotograph">
-            <section class="sectionphotograph">
+            <section class="sectionphotograph" aria-label="photographers information">
                 <div id="list_photographcontainer"></div>
                 <!--formulaire-->
-                <div class="formulaire">
+                <div class="formulaire" role="dialog" aria-hidden="false">
 
-                    <button class="modal-btn">
+                    <button class="modal-btn" aria-label="Contact Me" aria-describedby="modal title">
                         Contactez-moi
                     </button>
 
                     <div class="bground">
-                        <div class="content">
-                            <span class="close" id="closebtn"></span>
+                        <div class="content" aria-labelledby="Contact me `${name}`">
+                            <span class="close" id="closebtn" aria-label="Close Contact form"></span>
                             <div class="modal-body">
                                 <form id="inscription" novalidate name="reserve">
                                     <div class="hautformulaire">
-                                        <p class="contactez-moi">Contactez-moi</p>
+                                        <p class="contactez-moi" aria-label="text contact">Contactez-moi</p>
                                         <p class="namephotograph"></p>
 
                                     </div>
@@ -46,15 +47,16 @@
 
                                     <!-- 1ere data : prénom-->
                                     <div class="formData">
-                                        <label for="firstname">Prénom</label>
-                                        <input class="textcontrol" type="text" id="firstname" name="firstname" />
+                                        <label for="firstname" aria-label="label input firstname">Prénom</label>
+                                        <input class="textcontrol" type="text" id="firstname" name="firstname"
+                                            aria-labelledby="First name" />
 
                                         <div id="texterrorfirstname"></div>
                                     </div>
                                     <br />
                                     <!--2eme data : nom-->
                                     <div class="formData">
-                                        <label for="lastname">Nom</label>
+                                        <label for="lastname" aria-label="label input name">Nom</label>
                                         <input class="textcontrol" type="text" id="lastname" name="lastname" />
                                         <div id="texterrorlastname"></div>
                                     </div>
@@ -62,26 +64,27 @@
                                     <!--3eme data : email-->
 
                                     <div class="formData">
-                                        <label for="email">E-mail</label>
-                                        <input class="textcontrol" id="email" name="email" />
+                                        <label for="email" aria-label="label input email">E-mail</label>
+                                        <input class="textcontrol" id="email" name="email" aria-labelledby="Email" />
                                         <div id="texterroremail"></div>
                                     </div>
                                     <br />
                                     <!--4eme date : message-->
                                     <div class="formData">
-                                        <label for="message">Votre message</label>
+                                        <label for="message" aria-label="label input message">Votre message</label>
                                         <textarea class="textcontrol" type="text" id="message" name="message"
-                                            minlength="3" maxlength="174"></textarea>
+                                            minlength="3" maxlength="174" aria-labelledby="Your message"></textarea>
                                         <div id="texterrormessage"></div>
                                     </div>
                                     <br />
                                     <!--bouton transmission-->
-                                    <input class="btn-submit" type="submit" id="submit" name="submit" value="Envoyer" />
+                                    <input class="btn-submit" type="submit" id="submit" name="submit" value="Envoyer"
+                                        aria-label="Send" />
                                 </form>
                                 <!--message envoyer en dehors de form-->
                                 <div id="submitMessage" style="display:none">
                                     <p class="submitMessage">Merci ! <br>Pour votre message.</p>
-                                    <button class="btn-validation" id="btn-validation" type="button">Fermer</button>
+                                    <button class="btn-validation" id="btn-validation" type="submit">Fermer</button>
                                 </div>
                                 <!--pas nécessaire ce message apparemment-->
 
@@ -90,12 +93,12 @@
                     </div>
                 </div>
                 <!--fin formulaire-->
-            </section>
+            </section aria-hidden="true">
             <br />
 
         </main>
         <!-- <div id="list_container"></div> -->
-        <article id="articlephotograph"></article>
+        <article id="articlephotograph" aria-label="Lilac breasted roller, closeup view"></article>
 
         <div id="lightbox"></div>
 
