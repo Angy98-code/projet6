@@ -22,6 +22,7 @@ body {
 #logo {
   width: 190px;
   padding: 0;
+  margin-top: 20px;
   color: #901c1c;
 }
 header span {
@@ -56,7 +57,7 @@ header span {
 main {
   padding: 15px 0 40px 0;
 }
-H1 {
+.titre_principale_main {
   font-size: 18px;
   font-weight: 300;
   position: absolute;
@@ -79,6 +80,9 @@ section img {
 .portrait {
   justify-content: center;
   display: flex;
+}
+.titre_principale_main {
+  margin-top: 20px;
 }
 
 section H2 {
@@ -139,6 +143,15 @@ section H2 {
   background-color: #901c1c;
 }
 
+@media screen and (min-width: 600px) {
+  .titre_principale_main {
+    margin-top: 0;
+  }
+  #logo {
+    margin-top: 0px;
+  }
+}
+
 @media screen and (min-width: 760px) and (max-width: 961px) {
   #list_container1 {
     width: 45%;
@@ -172,7 +185,7 @@ section H2 {
     padding: 25px 0 0 0px;
     color: #901c1c;
   }
-  h1 {
+  .titre_principale_main {
     font-size: 21px;
     font-weight: 600;
     position: absolute;
@@ -1307,12 +1320,13 @@ transform: scale (1.2);
   color: black;
   background: #d3573c;
   width: 190px;
-  height: 35px;
+  height: 30px;
   text-align: center;
   border-radius: 5px;
-  padding: 7px 0 0 0;
+  padding: 5px 0 0 0;
   text-decoration: none;
 }
+
 .textHautHomepageAccessibilité:hover {
   color: #fff;
   background: #d3573c;

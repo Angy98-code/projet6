@@ -29,12 +29,12 @@
                 <!--formulaire-->
                 <div class="formulaire" role="dialog" aria-hidden="false">
 
-                    <button class="modal-btn" aria-label="Contact Me" aria-describedby="modal title">
+                    <button class="modal-btn" aria-label="Contact Me">
                         Contactez-moi
                     </button>
 
                     <div class="bground">
-                        <div class="content" aria-labelledby="Contact me `${name}`">
+                        <div class="content">
                             <span class="close" id="closebtn" aria-label="Close Contact form"></span>
                             <div class="modal-body">
                                 <form id="inscription" novalidate name="reserve">
@@ -47,33 +47,36 @@
 
                                     <!-- 1ere data : prénom-->
                                     <div class="formData">
-                                        <label for="firstname" aria-label="label input firstname">Prénom</label>
+                                        <label for="firstname" aria-labelledby="firstname">Prénom</label>
                                         <input class="textcontrol" type="text" id="firstname" name="firstname"
-                                            aria-labelledby="First name" />
+                                            aria-label="label input firstname" />
 
                                         <div id="texterrorfirstname"></div>
                                     </div>
                                     <br />
                                     <!--2eme data : nom-->
                                     <div class="formData">
-                                        <label for="lastname" aria-label="label input name">Nom</label>
-                                        <input class="textcontrol" type="text" id="lastname" name="lastname" />
+                                        <label for="lastname" aria-labelledby="lastname">Nom</label>
+                                        <input class="textcontrol" type="text" id="lastname" name="lastname"
+                                            aria-label="label input name" />
                                         <div id="texterrorlastname"></div>
                                     </div>
                                     <br />
                                     <!--3eme data : email-->
 
                                     <div class="formData">
-                                        <label for="email" aria-label="label input email">E-mail</label>
-                                        <input class="textcontrol" id="email" name="email" aria-labelledby="Email" />
+                                        <label for="email" aria-labelledby="email">E-mail</label>
+                                        <input class="textcontrol" id="email" name="email"
+                                            aria-label="label input email" />
                                         <div id="texterroremail"></div>
                                     </div>
                                     <br />
                                     <!--4eme date : message-->
                                     <div class="formData">
-                                        <label for="message" aria-label="label input message">Votre message</label>
-                                        <textarea class="textcontrol" type="text" id="message" name="message"
-                                            minlength="3" maxlength="174" aria-labelledby="Your message"></textarea>
+                                        <label for="message" aria-labelledby="message">Votre message</label>
+                                        <textarea class="textcontrol" type="text" id="message"
+                                            aria-label="label input message" name="message" minlength="3"
+                                            maxlength="174"></textarea>
                                         <div id="texterrormessage"></div>
                                     </div>
                                     <br />

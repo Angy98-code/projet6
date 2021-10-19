@@ -16,7 +16,7 @@ const getPageProfil = (
   portrait
 ) =>
   `<div class="partie1profilphotograph">
-    <div><h2 class="h2photograph" aria-label="presentation">${name}</h2></div>
+    <div><h1 class="h2photograph" aria-label="presentation">${name}</h1></div>
     <template class="id">${id}</template>
     <div aria-label="paragraph presentation">
     <div class="city_country">${city}, ${country}</div>
@@ -26,7 +26,7 @@ const getPageProfil = (
       ${tags
         .map(
           (tag) =>
-            `<span><a href="index.html" class="tagsphotograph" aria-label="Tag">#${tag}</a></span>`
+            `<span><a href="index.html" class="tagsphotograph" aria-label="${tag}">#${tag}</a></span>`
         )
         .join("")}
     </ul>                               
@@ -44,10 +44,10 @@ const getPageProfil = (
 
 <article id="articlephotograph" aria-hidden="false"></article>
   <div class="trierpar">
-    <p class="triertext" aria-label="input label">Trier par</p>
+    <label class="triertext" id="sortingSelect">Trier par</label>
       <div class="custom_select">
-        <select name="" id="sortingSelect" aria-labelledby="Order by">
-          <option id="option1" class="optionpopularite" value="popularity">Popularité</option>
+        <select name="" id="sortingSelect" aria-label="input label">
+          <option class="optionpopularite" value="popularity">Popularité</option>
           <option class="optiondate" value="date">Date</option>
           <option class="optiontitre" value="title">Titre</option>
         </select>
@@ -216,11 +216,11 @@ const getPageGalery = (
   
   <template class="date">${date}</template>
   </div>`;
-  const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="photograph image" role="img"/><template>${image}</template>
+  const htmlImage = `  <div onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="${title}" role="image"/><template>${image}</template>
     </div>
   `;
 
-  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="photograph video" role="video"/><template>${video}</template>
+  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video"/><template>${video}</template>
     </div>
   `;
   if (video) {
