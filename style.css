@@ -890,7 +890,6 @@ select {
   font-size: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   cursor: pointer;
-
   padding: 15px;
 }
 /*
@@ -992,7 +991,7 @@ flèche haut sur option !!!!
 }
 
 #articlephotograph {
-  margin: 40px 0 0 0;
+  margin: -193px 0 0 0;
 }
 /*
 .articlephotograph {
@@ -1033,6 +1032,14 @@ flèche haut sur option !!!!
   font-size: 14px;
 }
 
+.trierpar {
+  height: 200px;
+  position: relative;
+  display: flex;
+  top: 1692px;
+  opacity: 0;
+}
+
 @media screen and (min-width: 520px) {
   #portraitphotograph {
     border-radius: 50%;
@@ -1050,6 +1057,7 @@ flèche haut sur option !!!!
     flex-wrap: wrap;*/
     padding-bottom: 20px;
     display: flex;
+    margin-top: -193px;
     flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 30px;
@@ -1065,11 +1073,12 @@ flèche haut sur option !!!!
     object-fit: cover;
     background-size: contain;
   }
-  */ .trierpar {
+  .trierpar {
     height: 200px;
     position: relative;
     display: flex;
-    top: 3080px;
+    top: 1692px;
+    opacity: 0;
   }
   .formulaire {
     left: 38%;
@@ -1118,6 +1127,7 @@ flèche haut sur option !!!!
   .trierpar {
     top: 380px;
     position: absolute;
+    opacity: 1;
   }
 
   div.articlegalery {
@@ -1309,7 +1319,7 @@ transform: scale (1.2);
   }
 }
 
-.textHautHomepageAccessibilité {
+#textHautHomepageAccessibilité {
   position: fixed;
   display: none;
   top: 5px;
@@ -1327,7 +1337,7 @@ transform: scale (1.2);
   text-decoration: none;
 }
 
-.textHautHomepageAccessibilité:hover {
+#textHautHomepageAccessibilité:hover {
   color: #fff;
   background: #d3573c;
 }

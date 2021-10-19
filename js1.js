@@ -234,7 +234,7 @@ addListenerButtonNav();
 //     textHautHomepageAccessibilité.style.display = "block";
 //   }
 // };
-window.addEventListener("scroll", (myScript) => {
-  document.querySelector(".textHautHomepageAccessibilité").style.display =
-    "block";
+const contenu = document.getElementById("textHautHomepageAccessibilité");
+window.addEventListener("scroll", () => {
+  contenu.style.display = "block";
 });

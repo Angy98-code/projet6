@@ -16,43 +16,45 @@ const getPageProfil = (
   portrait
 ) =>
   `<div class="partie1profilphotograph">
-    <div><h1 class="h2photograph" aria-label="presentation">${name}</h1></div>
-    <template class="id">${id}</template>
-    <div aria-label="paragraph presentation">
-    <div class="city_country">${city}, ${country}</div>
-    <div class="taglinephotograph">${tagline}</div>
-    </div>
-    <ul class="container_photographtags">
-      ${tags
-        .map(
-          (tag) =>
-            `<span><a href="index.html" class="tagsphotograph" aria-label="${tag}">#${tag}</a></span>`
-        )
-        .join("")}
-    </ul>                               
-        
-  <div class="taillephotographiphone">
-    <img src="image/${portrait}" id="portraitphotograph" alt=""/>       
-  </div>
-
-    <div class="priceEachOne" aria-label="text">
-    <div class="totallikes"></div>
-      <div class="totalprice">${price}€ / jour</div>
-    </div>
+      <div><h1 class="h2photograph" aria-label="presentation, ${name}">${name}</h1></div>
+        <template class="id">${id}</template>
+          <div aria-label="paragraph presentation">
+            <div class="city_country">${city}, ${country}</div>
+            <div class="taglinephotograph">${tagline}</div>
+          </div>
+          <ul class="container_photographtags">
+            ${tags
+              .map(
+                (tag) =>
+                  `<span><a href="index.html" class="tagsphotograph" aria-label="${tag}">#${tag}</a></span>`
+              )
+              .join("")}
+          </ul>                               
+          
+             <div class="formulaire" alt="formulaire de contact" aria-label="contact me"></div>      
+          <div class="taillephotographiphone">
+       
+            <img src="image/${portrait}" id="portraitphotograph" alt="photo de ${name}"/>       
+          </div>
   
-  </div>        
+          <div class="priceEachOne" aria-label="text nombre total de like">
+            <div class="totallikes" alt="nombre total de like"></div>
+            <div class="totalprice">${price}€ / jour</div>
+          </div>
+   </div>        
 
-<article id="articlephotograph" aria-hidden="false"></article>
-  <div class="trierpar">
-    <label class="triertext" id="sortingSelect">Trier par</label>
-      <div class="custom_select">
-        <select name="" id="sortingSelect" aria-label="input label">
-          <option class="optionpopularite" value="popularity">Popularité</option>
-          <option class="optiondate" value="date">Date</option>
-          <option class="optiontitre" value="title">Titre</option>
-        </select>
-      </div>
-  </div aria-hidden="true">`;
+  
+    <div class="trierpar">
+      <label class="triertext" id="sortingSelect">Trier par</label>
+        <div class="custom_select">
+          <select name="" id="sortingSelect" aria-label="sortingSelect">
+            <option class="optionpopularite" value="popularity" aria-label="popularité">Popularité</option>
+            <option class="optiondate" value="date" aria-label="date">Date</option>
+            <option class="optiontitre" value="title" aria-label="titre">Titre</option>
+          </select>
+        </div>
+    </div aria-hidden="true">
+    <article id="articlephotograph" aria-hidden="false"></article>`;
 // la modal trier par
 //console.log(data.mediaFiltered.likes);
 //
@@ -220,7 +222,7 @@ const getPageGalery = (
     </div>
   `;
 
-  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video"/><template>${video}</template>
+  const htmlVideo = `  <div onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video" aria-label="video, ${video}"/><template>${video}</template>
     </div>
   `;
   if (video) {
