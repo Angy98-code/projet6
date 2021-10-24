@@ -234,7 +234,10 @@ addListenerButtonNav();
 //     textHautHomepageAccessibilité.style.display = "block";
 //   }
 // };
-const contenu = document.getElementById("textHautHomepageAccessibilité");
+
 window.addEventListener("scroll", () => {
-  contenu.style.display = "block";
+  const contenu = document.getElementById("textHautHomepageAccessibilité");
+  if (contenu) {
+    contenu.style.display = "block";
+  }
 });

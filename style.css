@@ -821,6 +821,7 @@ select {
 .custom_select {
   font-family: arial;
   padding-left: 2px;
+  cursor: pointer;
   font-size: 15px;
   color: white;
   width: 125px;
@@ -1002,6 +1003,7 @@ flèche haut sur option !!!!
 .imagesgalery,
 .videosgalery {
   width: 100%;
+  cursor: pointer;
   height: 220px;
   object-fit: cover;
   object-position: 0px 0px;
@@ -1225,6 +1227,7 @@ transform: scale (1.2);
 .lightbox__next,
 .lightbox__prev {
   border: none;
+  cursor: pointer;
   background: center center 100% 100%;
   position: fixed;
   top: 50%;

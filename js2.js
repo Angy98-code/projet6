@@ -1,5 +1,6 @@
 let data;
 let mediasFiltered;
+
 //let heartFilter;
 //
 // PARTIE PROFIL
@@ -100,7 +101,7 @@ const openLightbox = (mediaId, index) => {
 
   //récupérer la ref à l'img ds lightbox
   const image = document.querySelector(".lightbox img");
-  console.log("image", image);
+  // console.log("image", image);
 
   const mediaClick = mediasFiltered.find((media) => media.id === mediaId);
   //définir la src de l'img via attribut src
@@ -108,83 +109,57 @@ const openLightbox = (mediaId, index) => {
 
   // POUR VIDEO,
   const video = document.querySelector(".lightbox video");
-  console.log(video);
+  // console.log(video);
   const videoClick = mediasFiltered.find((media) => media.id === mediaId);
   video.src = `image/${videoClick.video}`;
 
-  const affichageLightbox = () => {
-    //cette fonction doit apparaitre
-    //dans le addeventlistener non ?
-    if (image === image) {
-      return image;
-    } else if (video === video) {
-      return video;
-    }
-  };
+  //SLIDER
+  //tableau avec les images et les videos
+  const mediaArray = mediasFiltered.map((mediaObject) => {
+    return {
+      srcTitle: mediaObject.image || mediaObject.video,
+      type: mediaObject.video ? "video" : "image",
+    };
+  });
 
-  /////////////////SLIDER A METTRE ICI
-  // //autre exemple
-  //const arraySlide = mediasFiltered;
-  // const slideImageVideo = document.querySelector(".slide"); //???
   const buttonNext = document.querySelector("div.lightbox__next");
   const buttonPrev = document.querySelector("div.lightbox__prev");
-  let i = 0; //current image or video
-  // const image2 = document.querySelector("div.lightbox img video");
-  //const arrayImageVideo ?????
+  let indexCurrentMedia = 0; //current image or video
 
-  //const btnCloseLightbox = document.querySelector(".lightbox__close");
-  modallb = document.querySelector(".lightbox"); //close modal ici pour exemple
-  // btnCloseLightbox.addEventListener("click", function (event) {
   buttonNext.addEventListener("click", function (event) {
-    i++;
+    indexCurrentMedia++;
+    console.log("indexCurrentMedia", indexCurrentMedia);
     //add 1 to current index
-    if (i > mediaClick.length - 1) {
-      //? mediasFiltered (arrayphoto)
+    if (indexCurrentMedia > mediaArray.length - 1) {
       //if current index passes last photo in array
-      i = 0;
+      indexCurrentMedia = 0;
       //     //set index back to zero
     }
+    //
+    const mediaShown = mediaArray[indexCurrentMedia];
 
-    //video.src = mediasFiltered[i]; //mediaclick ne fonctionne pas
-    image.src = mediaClick[i];
-    //video.src = videoClick[i]; //ca bouge un peu mais ne fonctionne pas
-    console.log("mediaClick", mediaClick);
-    //??? (photo !!)non pas slideimagevideo
-    //attention j'ai image et video !!!!
-    //   //set slide to current index
+    (mediaShown.type === "image"
+      ? image
+      : video
+    ).src = `image/${mediaShown.srcTitle}`;
+
+    console.log("mediaArray", mediaArray, mediaArray[indexCurrentMedia]);
   });
   buttonPrev.addEventListener("click", function (event) {
-    modallb.style.display = "none";
+    indexCurrentMedia--;
+    //add 1 to current index
+    if (indexCurrentMedia < 0) {
+      indexCurrentMedia = mediaArray.length - 1;
+    }
+    mediaShown = mediaArray[indexCurrentMedia];
+
+    (mediaShown.type === "image"
+      ? image
+      : video
+    ).src = `image/${mediaShown.srcTitle}`;
+    console.log("mediaArray", mediaArray, mediaArray[indexCurrentMedia]);
   });
 }; // ---------------fermeture openLightbox
-
-//autre exemple
-// var i = 0;
-
-// function ChangeSlide(sens) {
-//     i = i + sens;
-//     if (numero < 0)
-//         numero = slide.length - 1;
-//     if (numero > slide.length - 1)
-//         numero = 0;
-//     document.getElementById("slide").src = slide[numero];
-// }
-
-//previous slide
-// const goPreviousMedia = () => {
-//   if (indexCurrentMedia > 0) indexCurrentMedia--;
-//   else indexCurrentMedia = mediasFiltered.length - 1;
-
-//   createNewMedia();
-// };
-
-// //next slide
-// const goNextPhotoMedia = () => {
-//   if (indexCurrentMedia < media.length - 1) indexCurrentMedia++;
-//   else indexCurrentMedia = 0;
-
-//   createNewMedia();
-// };
 
 // array galery
 const getPageGalery = (
@@ -199,7 +174,7 @@ const getPageGalery = (
   price,
   index
 ) => {
-  console.log("getPageGalery", index);
+  // console.log("getPageGalery", index);
   let htmlString = `<div class="articlegalery">
   <template>${id}</template>
   <template>${photographerId}</template>
@@ -253,8 +228,8 @@ const renderHTML = () => {
 
   // . find permet de récupérer le 1er element du tableau qui valide*/
   // la condition
-  console.log("photograph", { photograph });
-  console.log("media", { mediasFiltered });
+  //console.log("photograph", { photograph });
+  //console.log("media", { mediasFiltered });
 
   const elementPhotograph = document.getElementById("list_photographcontainer");
 
@@ -295,7 +270,7 @@ const renderHTML = () => {
   elementContainerGallery.innerHTML = mediasFilteredHtml; // elementContainerGallery est la référence vers l'élément dans lequel tu veux afficher tes photos.
 
   // photograph.name.innerHTML = document.querySelector("p.namephotograph");
-  console.log(photograph.name);
+  //console.log(photograph.name);
   //elementModalInputName.innerHTML = photograph.name;
   document.querySelector(".namephotograph").innerHTML = photograph.name;
 
@@ -305,7 +280,7 @@ const renderHTML = () => {
     // console.log(lesLikes, medias);
     return (lesLikes += parseInt(media.likes));
   });
-  console.log(lesLikes);
+  // console.log(lesLikes);
 
   document.querySelector(".totallikes").innerHTML = lesLikes;
 };
@@ -319,7 +294,7 @@ fetch("./FishEyeData.json")
 
   // 2eme promise ulr des img
   .then((dataFetch) => {
-    console.log(dataFetch);
+    // console.log(dataFetch);
     data = dataFetch;
     renderHTML();
     setupLightbox();
@@ -384,6 +359,7 @@ const renderSelect = () => {
       //retrier les éléments photo en fonction event target
       if (sortValue === "Popularité") {
         //trier par popularité les médias et les réafficher
+        //////////ON NE DOIT PAS UTILISER MEDIAARRAY ???
         mediasFiltered.sort((a, b) => {
           // console.log(a, b);
           if (a.likes < b.likes) {
@@ -393,11 +369,11 @@ const renderSelect = () => {
           }
         });
 
-        console.log(
-          "pour les likes mediasFiltered, mediasBeforeSort",
-          mediasFiltered,
-          mediasBeforeSort
-        );
+        //  // console.log(
+        //     "pour les likes mediasFiltered, mediasBeforeSort",
+        //     mediasFiltered,
+        //     mediasBeforeSort
+        //   );
       } else if (sortValue === "Date") {
         //trier par date
         mediasFiltered.sort((a, b) => {
@@ -408,11 +384,11 @@ const renderSelect = () => {
             return -1;
           }
         });
-        console.log(
-          "pour les dates mediasFiltered, mediasBeforeSort",
-          mediasFiltered,
-          mediasBeforeSort
-        );
+        // console.log(
+        //   "pour les dates mediasFiltered, mediasBeforeSort",
+        //   mediasFiltered,
+        //   mediasBeforeSort
+        // );
       } else if (sortValue === "Titre") {
         //trier par titre
         mediasFiltered.sort((a, b) => {
@@ -423,11 +399,11 @@ const renderSelect = () => {
             return -1;
           }
         });
-        console.log(
-          "pour les dates mediasFiltered, mediasBeforeSort",
-          mediasFiltered,
-          mediasBeforeSort
-        );
+        // console.log(
+        //   "pour les dates mediasFiltered, mediasBeforeSort",
+        //   mediasFiltered,
+        //   mediasBeforeSort
+        // );
       }
 
       // on remet le même code qu'au dessus pour le trie, faire une fonction serait mieux
@@ -458,7 +434,7 @@ const renderSelect = () => {
       //-----------------changer le textcontent
       // on fait une boucle sur chacune des options du select original
       for (let option of selectElt.options) {
-        console.log("selectElt.options", selectElt.options);
+        // console.log("selectElt.options", selectElt.options);
         //if les options de mon select d'origine est égal a l'élément que
         // je viens de cliquer
         if (option.innerHTML === this.innerHTML) {
@@ -469,7 +445,7 @@ const renderSelect = () => {
           // une fois que j'ai trouvé le bon textcontent pas la peine d'aller plus loin
           // on met sur le menu sur ce que l'on clique
           newSelect.innerHTML = this.innerHTML;
-          console.log(newSelect);
+          // console.log(newSelect);
           break;
         }
         //apparait comme avant lors d'un nouveau click
@@ -557,7 +533,7 @@ const clickOnLikes = () => {
         return media;
       });
 
-      console.log("likesElements", mediaId);
+      //  console.log("likesElements", mediaId);
       recalculTotalLikes();
     });
   });
