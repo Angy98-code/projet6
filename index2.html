@@ -18,8 +18,8 @@
         <!--LOGO-->
         <header class="headerphotograph">
             <div id="logophotograph">
-                <a href="index.html#Fisheye Home Page" aria-label="back homepage"><img src="Logo.png" role="img"
-                        alt="logo fisheye back home page" id="logophotograph" /></a>
+                <a href="index.html#Fisheye Home Page" tabindex="1" aria-label="back homepage"><img src="Logo.png"
+                        role="img" alt="logo fisheye back home page" id="logophotograph" /></a>
             </div>
         </header>
         <!--présentation profil photograph-->
@@ -29,7 +29,7 @@
                 <!--formulaire-->
                 <div class="formulaire" role="dialog" alt="formulaire pour envoyer un message" aria-hidden="false">
 
-                    <button class="modal-btn" aria-label="Contact Me">
+                    <button class="modal-btn" tabindex="3" aria-label="Contact Me">
                         Contactez-moi
                     </button>
 
@@ -81,8 +81,10 @@
                                     </div>
                                     <br />
                                     <!--bouton transmission-->
-                                    <input class="btn-submit" type="submit" id="submit" name="submit" value="Envoyer"
-                                        aria-label="Send" />
+                                    <div class="boutonfinformulaire">
+                                        <input class="btn-submit" type="submit" id="submit" name="submit"
+                                            value="Envoyer" aria-label="Send" />
+                                    </div>
                                 </form>
                                 <!--message envoyer en dehors de form-->
                                 <div id="submitMessage" style="display:none">
@@ -101,16 +103,16 @@
 
         </main>
         <!-- <div id="list_container"></div> -->
-        <article id="articlephotograph" aria-label="Lilac breasted roller, closeup view"></article>
+        <article id="articlephotographreally" aria-label="Lilac breasted roller, closeup view">
 
-        <div id="lightbox"></div>
-
+            <div id="lightbox"></div>
+        </article>
 
         <div class="likepricecard"></div>
 
         <div id="galerycard"></div>
 
-        </article>
+
         <template id="list_container">
 
         </template>
