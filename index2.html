@@ -35,7 +35,7 @@
 
                     <div class="bground">
                         <div class="content">
-                            <span class="close" id="closebtn" aria-label="Close Contact form"></span>
+                            <span class="close" id="closebtn" aria-label="Close Contact form" tabindex="10"></span>
                             <div class="modal-body">
                                 <form id="inscription" novalidate name="reserve">
                                     <div class="hautformulaire">
@@ -49,7 +49,7 @@
                                     <div class="formData">
                                         <label for="firstname" aria-labelledby="firstname">Prénom</label>
                                         <input class="textcontrol" type="text" id="firstname" name="firstname"
-                                            aria-label="label input firstname" />
+                                            aria-label="label input firstname" tabindex="4" />
 
                                         <div id="texterrorfirstname"></div>
                                     </div>
@@ -58,7 +58,7 @@
                                     <div class="formData">
                                         <label for="lastname" aria-labelledby="lastname">Nom</label>
                                         <input class="textcontrol" type="text" id="lastname" name="lastname"
-                                            aria-label="label input name" />
+                                            aria-label="label input name" tabindex="5" />
                                         <div id="texterrorlastname"></div>
                                     </div>
                                     <br />
@@ -67,7 +67,7 @@
                                     <div class="formData">
                                         <label for="email" aria-labelledby="email">E-mail</label>
                                         <input class="textcontrol" id="email" name="email"
-                                            aria-label="label input email" />
+                                            aria-label="label input email" tabindex="6" />
                                         <div id="texterroremail"></div>
                                     </div>
                                     <br />
@@ -76,20 +76,21 @@
                                         <label for="message" aria-labelledby="message">Votre message</label>
                                         <textarea class="textcontrol" type="text" id="message"
                                             aria-label="label input message" name="message" minlength="3"
-                                            maxlength="174"></textarea>
+                                            maxlength="174" tabindex="7"></textarea>
                                         <div id="texterrormessage"></div>
                                     </div>
                                     <br />
                                     <!--bouton transmission-->
                                     <div class="boutonfinformulaire">
                                         <input class="btn-submit" type="submit" id="submit" name="submit"
-                                            value="Envoyer" aria-label="Send" />
+                                            value="Envoyer" aria-label="Send" tabindex="8" />
                                     </div>
                                 </form>
                                 <!--message envoyer en dehors de form-->
                                 <div id="submitMessage" style="display:none">
                                     <p class="submitMessage">Merci ! <br>Pour votre message.</p>
-                                    <button class="btn-validation" id="btn-validation" type="submit">Fermer</button>
+                                    <button class="btn-validation" id="btn-validation" type="submit"
+                                        tabindex="9">Fermer</button>
                                 </div>
                                 <!--pas nécessaire ce message apparemment-->
 

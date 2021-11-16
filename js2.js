@@ -38,7 +38,7 @@ const getPageProfil = (
             <img src="image/${portrait}"  id="portraitphotograph" alt="photo de ${name}"/>       
           </div>
   
-          <div class="priceEachOne"  tabindex="5" aria-label="text nombre total de like">
+          <div class="priceEachOne"  tabindex="13" aria-label="text nombre total de like">
             <div class="totallikes" alt="nombre total de like"></div>
             <div class="totalprice">${price}€ / jour</div>
           </div>
@@ -48,8 +48,8 @@ const getPageProfil = (
     <div class="trierpar">
       <label class="triertext" id="sortingSelect">Trier par</label>
         <div class="custom_select">
-          <select name="" id="sortingSelect"  tabindex="4"  aria-label="sortingSelect">
-            <option class="optionpopularite" value="popularity" aria-label="popularité">Popularité</option>
+          <select name="" id="sortingSelect" aria-label="sortingSelect">
+            <option class="optionpopularite" value="popularity" aria-label="popularité" tabindex="12" >Popularité</option>
             <option class="optiondate" value="date" aria-label="date">Date</option>
             <option class="optiontitre" value="title" aria-label="titre">Titre</option>
           </select>
@@ -105,12 +105,18 @@ function setupLightbox() {
       const modallb = document.querySelector(".lightbox");
       btnCloseLightbox.addEventListener("click", function (event) {
         modallb.style.display = "none";
+        lightboxOpened = false;
+        //ME RETROUVER AU MM ENDROIT ?????
         // debugger;
         // window.removeEventListener("keydown");
       });
       window.addEventListener("keydown", function (e) {
+        if (!lightboxOpened) {
+          return;
+        }
         if (e.key === "Escape" || e.key === "Esc") {
           modallb.style.display = "none";
+          //lightboxOpened = false;
         }
         if (e.key === "Tab" && modallb !== null) {
           focusInModallb(e);
@@ -123,8 +129,11 @@ function setupLightbox() {
   // fermeture lightbox si on clique sue echape
 } // -----------------------fermeture setuptLightbox
 
+let lightboxOpened = false; // lightbox is open ?
+
 // ----------OUVERTURE DE LA LIGHTBOX
 const openLightbox = (mediaId, index) => {
+  lightboxOpened = true;
   setupLightbox(); // appel de la fonction setupLightbox qui représente le html
 
   //passer la lightbox en display block
@@ -209,43 +218,6 @@ const openLightbox = (mediaId, index) => {
       image.style.display = "none";
     }
   });
-
-  ///////////////////////////////////////:focus ici ???????????????????????????
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //NE MARCHEEEE PAS
-
-  // function trapFocus(element) {
-  //   let focusableEls = document.querySelector(
-  //     "button.lightbox__prev",
-  //     "button.lightbox__next",
-  //     "button.lightbox__close"
-  //   );
-
-  //   let firstFocusableEl = focusableEls[0];
-  //   let lastFocusableEl = focusableEls[focusableEls.length - 1];
-  //   let KEYCODE_TAB = 9;
-
-  //   element.addEventListener("keydown", function (e) {
-  //     let isTabPressed = e.key === "Tab" || e.keyCode === KEYCODE_TAB;
-
-  //     if (!isTabPressed) {
-  //       return;
-  //     }
-
-  //     if (e.shiftKey) {
-  //       /* shift + tab */ if (document.activeElement === firstFocusableEl) {
-  //         lastFocusableEl.focus();
-  //         e.preventDefault();
-  //       }
-  //     } /* tab */ else {
-  //       if (document.activeElement === lastFocusableEl) {
-  //         firstFocusableEl.focus();
-  //         e.preventDefault();
-  //       }
-  //     }
-  //   });
-  // }
-  // trapFocus();
 }; // ---------------fermeture openLightbox
 
 // AFFICHAGE DE LA GALERY
@@ -395,7 +367,7 @@ const dropdownTrierPar = () => {
   const selectDiv = document.querySelector(".custom_select");
   const newSelect = document.createElement("button");
   newSelect.classList.add("newselecttrier"); //on lui ajoute la class newselect
-  newSelect.setAttribute("tabIndex", "4"); // accessibilité
+  newSelect.setAttribute("tabIndex", "11"); // accessibilité
   newSelect.innerHTML = selectElt.options[selectElt.selectedIndex].innerHTML; //on lui met le contenu /////////////////////selectElt.options
   selectDiv.appendChild(newSelect); //on peut cree maintenant l'élément dans le DOM
 
@@ -409,6 +381,7 @@ const dropdownTrierPar = () => {
   for (let option of selectElt.options) {
     const newOption = document.createElement("button");
     newOption.classList.add("btntrierouvert");
+    newOption.setAttribute("tabIndex", "12"); // accessibilité
     newOption.innerHTML = option.innerHTML;
     // on ajoute après avoir fait la deuxième fleche
     //un ecouteur d'évenement click pour les options
