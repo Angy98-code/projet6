@@ -727,7 +727,7 @@ ul.container_photographtags {
   }
 }
 
-@media screen and (min-width: 484px) {
+@media screen and (min-width: 495px) {
   .h2photograph {
     padding: 10px 0 5px 0;
     color: #d3573c;
@@ -853,6 +853,7 @@ select {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  font-size: 15px;
   padding: 15px;
   width: 125px;
   font-weight: lighter;
@@ -973,7 +974,7 @@ flèche haut sur option !!!!
 /* 1er enlevement bordure icon */
 .heartbtn {
   border: 0px;
-
+  display: flex;
   font-size: 14px;
 }
 /* 2eme enlevement contour icon peu visible  */
@@ -1193,7 +1194,7 @@ flèche haut sur option !!!!
 .lightbox i {
   color: #901c1c;
   font-size: 32px;
-  background-color: transparent;
+  background-color: white;
 }
 
 .slide {
@@ -1210,6 +1211,7 @@ flèche haut sur option !!!!
   border: none;
   cursor: pointer;
   background: center center 100% 100%;
+  background-color: white;
   position: fixed;
   top: 50%;
   right: 0;

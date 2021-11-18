@@ -1,7 +1,6 @@
 //variables scope global
 let data; //media et photographers / objet ayant pour propriétés media et photographers
 let mediasFiltered; //données de chaque photographe
-
 //
 // ----------partie PROFIL construction du Dom
 // getPageProfil() création html des profils
@@ -38,7 +37,7 @@ const getPageProfil = (
             <img src="image/${portrait}"  id="portraitphotograph" alt="photo de ${name}"/>       
           </div>
   
-          <div class="priceEachOne"  tabindex="13" aria-label="text nombre total de like">
+          <div class="priceEachOne" aria-label="text nombre total de like">
             <div class="totallikes" alt="nombre total de like"></div>
             <div class="totalprice">${price}€ / jour</div>
           </div>
@@ -82,31 +81,31 @@ function setupLightbox() {
   // focuslightbox FERMETURE LIGHTBOX par le bouton close ou echape ainsi que focus sur les 3 buttons
 
   function focusLightbox() {
-    const buttonSelectionnes = document.querySelector(".lightbox__container");
-    const focusableSelector = "button";
+    const lightboxContainer = document.querySelector(".lightbox__container");
     let focusables = [];
-    focusables = Array.from(
-      buttonSelectionnes.querySelectorAll(focusableSelector)
-    );
+    let previouslyFocusedElement = null; // permet de revenir à l'endroit avant focus
+    focusables = Array.from(lightboxContainer.querySelectorAll("button"));
+    previouslyFocusedElement = document.querySelector(":focus"); // permet de revenir à l'endroit avant focus
     console.log(focusables);
     const focusInModallb = function (e) {
       e.preventDefault();
-      let indexDes3Boutons = focusables.findIndex(
-        (f) => f === buttonSelectionnes.querySelector(":focus")
+      let indexFocusedButton = focusables.findIndex(
+        (button) => button === lightboxContainer.querySelector(":focus")
       );
-      indexDes3Boutons++;
-      if (indexDes3Boutons >= focusables.length) {
-        indexDes3Boutons = 0;
+      indexFocusedButton++;
+      if (indexFocusedButton >= focusables.length) {
+        indexFocusedButton = 0;
       }
-      focusables[indexDes3Boutons].focus();
+      focusables[indexFocusedButton].focus();
     };
     function fermetureDeLaLightbox() {
       const btnCloseLightbox = document.querySelector(".lightbox__close");
       const modallb = document.querySelector(".lightbox");
+
       btnCloseLightbox.addEventListener("click", function (event) {
         modallb.style.display = "none";
+        if (previouslyFocusedElement !== null) previouslyFocusedElement.focus(); // permet de revenir à l'endroit avant focus
         lightboxOpened = false;
-        //ME RETROUVER AU MM ENDROIT ?????
         // debugger;
         // window.removeEventListener("keydown");
       });
@@ -245,7 +244,7 @@ const getPageGalery = (
                         <div class="cardonlytitlelikes" >
                           <p aria-label="text">${title}</p>
                           <div class="heartbtn" data-id="${id}"> 
-                          <span class="onelike" aria-label="likes">${likes}</span>
+                          <button class="onelike" aria-label="likes">${likes}</button>
                           </div>
                         </div>
                         <template class="date">${date}</template>
@@ -701,7 +700,7 @@ const clickOnLikes = () => {
           }
 
           // incrémente nombre de likes du média dans le dom
-          element.querySelector("span").innerHTML = media.likes;
+          element.querySelector("button").innerHTML = media.likes;
         }
         return media;
       });
