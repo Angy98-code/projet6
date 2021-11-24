@@ -521,10 +521,10 @@ const dropdownTrierPar = () => {
 //
 // DOM Elements bouton je m'inscris modalbtn !!! c'est le button de chaque page
 
-const modalBtn = document.querySelectorAll(".modal-btn");
+const modalButton = document.querySelectorAll(".modal-btn");
 //lauch modal
 // launch modal (bouton je m'inscris) évenement du formulaire au click
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalButton.forEach((btn) => btn.addEventListener("click", launchModal));
 // apparition de la launchModal formulaire d'inscription
 function launchModal() {
   modalbg.style.display = "block";
