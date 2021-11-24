@@ -231,7 +231,6 @@ const getPageGalery = (
   tags,
   likes,
   date,
-  price,
   index
 ) => {
   let htmlString = `<div class="articlegalery">
@@ -251,9 +250,9 @@ const getPageGalery = (
                     </div>`;
   const htmlImage = `<button role="button" onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="${title}" role="image"/><template>${image}</template>
     </button>`; //appel fonction openLightBox()
+
   const htmlVideo = `<button role="button" onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video" aria-label="video, ${video}"/><template>${video}</template>
     </button>`; //appel fonction openLightBox()
-
   if (video) {
     htmlString = htmlString.replace("#bloctoreplace", htmlVideo);
   } else {
