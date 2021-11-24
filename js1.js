@@ -74,7 +74,7 @@ const getListItemHtml = (
   price,
   tags
 ) => {
-  console.log("INFO", tags);
+ 
 
   return `
 <div id="${id}" data-tags="${tags}" class="listitem">
@@ -114,7 +114,7 @@ const listItemHtmlArray = photographArray.map((photograph) => {
   );
 });
 element.innerHTML = listItemHtmlArray.join("");
-console.log(photographArray);
+
 
 // tags
 
@@ -123,7 +123,6 @@ console.log(photographArray);
 //côté tag du nav
 const addListenerButtonNav = () => {
   const navButtons = document.querySelectorAll(".navbutton");
-  console.log(navButtons);
   navButtons.forEach((buttonElement) => {
     buttonElement.addEventListener("click", () => {
       const tagValue = buttonElement.getAttribute("data-tag");
@@ -139,7 +138,6 @@ const addListenerButtonNav = () => {
         selectedTags.push(tagValue);
         //chercher le nom des autres et faire push(tagValue)
       }
-      console.log("selectedTags", selectedTags);
 
       //boucler dans les photographes et sélectionner ceux qui ont tous
       //les tags de selectedTags

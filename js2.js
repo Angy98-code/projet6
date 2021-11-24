@@ -86,7 +86,6 @@ function setupLightbox() {
     let previouslyFocusedElement = null; // permet de revenir à l'endroit avant focus
     focusables = Array.from(lightboxContainer.querySelectorAll("button"));
     previouslyFocusedElement = document.querySelector(":focus"); // permet de revenir à l'endroit avant focus
-    console.log(focusables);
     const focusInModallb = function (e) {
       e.preventDefault();
       let indexFocusedButton = focusables.findIndex(
