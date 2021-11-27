@@ -68,7 +68,7 @@ let selectedTags = [];
 // FACTORY PATTERN METHOD : élément Photograp réutilisable
 // rajouter le constructor ajouter this const photograph = new Photograph  Photograph. renderHtml
 // rajouter renderHtml this.
-// 
+//
 const Photograph = (
   portrait,
   name,

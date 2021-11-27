@@ -219,20 +219,22 @@ const openLightbox = (mediaId, index) => {
 }; // ---------------fermeture openLightbox
 
 // AFFICHAGE DE LA GALERY
-// injection html
-//2°) affichage de la galery d'images et video
-const getPageGalery = (
-  id,
-  photographerId,
-  title,
-  image,
-  video,
-  tags,
-  likes,
-  date,
-  index
-) => {
-  let htmlString = `<div class="articlegalery">
+// Factory method pattern : élément PhotographMedia réutilisable
+// pour afficher image et video
+
+class PhotographMedia {
+  constructor(
+    id,
+    photographerId,
+    title,
+    image,
+    video,
+    tags,
+    likes,
+    date,
+    index
+  ) {
+    let htmlString = `<div class="articlegalery">
                       <template>${id}</template>
                       <template>${photographerId}</template>
                       <template>${tags}</template>
@@ -247,18 +249,19 @@ const getPageGalery = (
                         </div>
                         <template class="date">${date}</template>
                     </div>`;
-  const htmlImage = `<button role="button" onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="${title}" role="image"/><template>${image}</template>
+    const htmlImage = `<button role="button" onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="${title}" role="image"/><template>${image}</template>
     </button>`; //appel fonction openLightBox()
 
-  const htmlVideo = `<button role="button" onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video" aria-label="video, ${video}"/><template>${video}</template>
+    const htmlVideo = `<button role="button" onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video" aria-label="video, ${video}"/><template>${video}</template>
     </button>`; //appel fonction openLightBox()
-  if (video) {
-    htmlString = htmlString.replace("#bloctoreplace", htmlVideo);
-  } else {
-    htmlString = htmlString.replace("#bloctoreplace", htmlImage);
+    if (video) {
+      htmlString = htmlString.replace("#bloctoreplace", htmlVideo);
+    } else {
+      htmlString = htmlString.replace("#bloctoreplace", htmlImage);
+    }
+    return htmlString;
   }
-  return htmlString;
-};
+}
 //
 // ----------fonction principale
 //
@@ -307,19 +310,20 @@ function renderHTML() {
   );
 
   const mediasFilteredHtml = mediasFiltered
-    .map((media, index) =>
-      getPageGalery(
-        media.id,
-        media.photographerId,
-        media.title,
-        media.image,
-        media.video,
-        media.tags,
-        media.likes,
-        media.date,
-        media.price,
-        index
-      )
+    .map(
+      (media, index) =>
+        new PhotographMedia(
+          media.id,
+          media.photographerId,
+          media.title,
+          media.image,
+          media.video,
+          media.tags,
+          media.likes,
+          media.date,
+          media.price,
+          index
+        )
     )
     .join("");
   const elementContainerGallery = document.getElementById("articlephotograph");
@@ -423,19 +427,20 @@ const dropdownTrierPar = () => {
 
       // on remet le même code qu'au dessus pour le trie, faire une fonction serait mieux
       const mediasFilteredHtml = mediasFiltered
-        .map((media, index) =>
-          getPageGalery(
-            media.id,
-            media.photographerId,
-            media.title,
-            media.image,
-            media.video,
-            media.tags,
-            media.likes,
-            media.date,
-            media.price,
-            index
-          )
+        .map(
+          (media, index) =>
+            new PhotographMedia(
+              media.id,
+              media.photographerId,
+              media.title,
+              media.image,
+              media.video,
+              media.tags,
+              media.likes,
+              media.date,
+              media.price,
+              index
+            )
         )
         .join("");
       const elementContainerGallery =
