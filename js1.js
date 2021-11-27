@@ -64,7 +64,12 @@ const photographArray = [
 let selectedTags = [];
 
 // getListItemHtml construction des éléments du DOM
-const getListItemHtml = (
+
+// FACTORY PATTERN METHOD : élément Photograp réutilisable
+// rajouter le constructor ajouter this const photograph = new Photograph  Photograph. renderHtml
+// rajouter renderHtml this.
+// 
+const Photograph = (
   portrait,
   name,
   id,
@@ -74,8 +79,6 @@ const getListItemHtml = (
   price,
   tags
 ) => {
- 
-
   return `
 <div id="${id}" data-tags="${tags}" class="listitem">
 <div class="accessibiliterefaitportrait">
@@ -102,7 +105,7 @@ const getListItemHtml = (
 //elements qui vont se retrouver dans les éléments html
 const element = document.getElementById("list_container");
 const listItemHtmlArray = photographArray.map((photograph) => {
-  return getListItemHtml(
+  return Photograph(
     photograph.portrait,
     photograph.name,
     photograph.id,
@@ -114,7 +117,6 @@ const listItemHtmlArray = photographArray.map((photograph) => {
   );
 });
 element.innerHTML = listItemHtmlArray.join("");
-
 
 // tags
 
