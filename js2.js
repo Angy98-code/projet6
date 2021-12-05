@@ -234,27 +234,38 @@ class PhotographMedia {
     date,
     index
   ) {
+    this.id = id;
+    this.photographerId = photographerId;
+    this.title = title;
+    this.image = image;
+    this.video = video;
+    this.tags = tags;
+    this.likes = likes;
+    this.date = date;
+    this.index = index;
+  }
+  renderHTML() {
     let htmlString = `<div class="articlegalery">
-                      <template>${id}</template>
-                      <template>${photographerId}</template>
-                      <template>${tags}</template>
+                      <template>${this.id}</template>
+                      <template>${this.photographerId}</template>
+                      <template>${this.tags}</template>
                         <div class="photocard">
                           #bloctoreplace
                         </div>  
                         <div class="cardonlytitlelikes" >
-                          <p aria-label="text">${title}</p>
-                          <div class="heartbtn" data-id="${id}"> 
-                          <button class="onelike" aria-label="likes">${likes}</button>
+                          <p aria-label="text">${this.title}</p>
+                          <div class="heartbtn" data-id="${this.id}"> 
+                          <button class="onelike" aria-label="likes">${this.likes}</button>
                           </div>
                         </div>
-                        <template class="date">${date}</template>
+                        <template class="date">${this.date}</template>
                     </div>`;
-    const htmlImage = `<button role="button" onclick="return openLightbox(${id}, ${index})"><img src="image/${image}" class="imagesgalery" alt="${title}" role="image"/><template>${image}</template>
+    const htmlImage = `<button role="button" onclick="return openLightbox(${this.id}, ${this.index})"><img src="image/${this.image}" class="imagesgalery" alt="${this.title}" role="image"/><template>${this.image}</template>
     </button>`; //appel fonction openLightBox()
 
-    const htmlVideo = `<button role="button" onclick="return openLightbox(${id}, ${index})"><video controls src="image/${video}" class="videosgalery" alt="${title}" role="video" aria-label="video, ${video}"/><template>${video}</template>
+    const htmlVideo = `<button role="button" onclick="return openLightbox(${this.id}, ${this.index})"><video controls src="image/${this.video}" class="videosgalery" alt="${this.title}" role="video" aria-label="video, ${this.video}"/><template>${this.video}</template>
     </button>`; //appel fonction openLightBox()
-    if (video) {
+    if (this.video) {
       htmlString = htmlString.replace("#bloctoreplace", htmlVideo);
     } else {
       htmlString = htmlString.replace("#bloctoreplace", htmlImage);
@@ -310,21 +321,21 @@ function renderHTML() {
   );
 
   const mediasFilteredHtml = mediasFiltered
-    .map(
-      (media, index) =>
-        new PhotographMedia(
-          media.id,
-          media.photographerId,
-          media.title,
-          media.image,
-          media.video,
-          media.tags,
-          media.likes,
-          media.date,
-          media.price,
-          index
-        )
-    )
+    .map((media, index) => {
+      const photograph = new PhotographMedia(
+        media.id,
+        media.photographerId,
+        media.title,
+        media.image,
+        media.video,
+        media.tags,
+        media.likes,
+        media.date,
+        media.price,
+        index
+      );
+      return photograph.renderHTML();
+    })
     .join("");
   const elementContainerGallery = document.getElementById("articlephotograph");
   elementContainerGallery.innerHTML = mediasFilteredHtml;
@@ -426,26 +437,28 @@ const dropdownTrierPar = () => {
       }
 
       // on remet le même code qu'au dessus pour le trie, faire une fonction serait mieux
+
       const mediasFilteredHtml = mediasFiltered
-        .map(
-          (media, index) =>
-            new PhotographMedia(
-              media.id,
-              media.photographerId,
-              media.title,
-              media.image,
-              media.video,
-              media.tags,
-              media.likes,
-              media.date,
-              media.price,
-              index
-            )
-        )
+        .map((media, index) => {
+          const photograph = new PhotographMedia(
+            media.id,
+            media.photographerId,
+            media.title,
+            media.image,
+            media.video,
+            media.tags,
+            media.likes,
+            media.date,
+            media.price,
+            index
+          );
+          return photograph.renderHTML();
+        })
         .join("");
       const elementContainerGallery =
         document.getElementById("articlephotograph");
-      elementContainerGallery.innerHTML = mediasFilteredHtml; // elementContainerGallery est la référence vers l'élément dans lequel tu veux afficher tes photos.
+      elementContainerGallery.innerHTML = mediasFilteredHtml;
+
       //fin du code repris
       //modifier le textcontent du bouton du filtre
       //date si click, likes  etc.

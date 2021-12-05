@@ -69,29 +69,35 @@ let selectedTags = [];
 // rajouter le constructor ajouter this const photograph = new Photograph  Photograph. renderHtml
 // rajouter renderHtml this.
 //
-const Photograph = (
-  portrait,
-  name,
-  id,
-  city,
-  country,
-  tagline,
-  price,
-  tags
-) => {
-  return `
-<div id="${id}" data-tags="${tags}" class="listitem">
+class Photograph {
+  constructor(portrait, name, id, city, country, tagline, price, tags) {
+    this.portrait = portrait;
+    this.name = name;
+    this.id = id;
+    this.city = city;
+    this.country = country;
+    this.tagline = tagline;
+    this.price = price;
+    this.tags = tags;
+  }
+  renderHTML() {
+    return `
+<div id="${this.id}" data-tags="${this.tags}" class="listitem">
 <div class="accessibiliterefaitportrait">
-<a href="index2.html?photographId=${id}" id="link${id}" class="portrait"><img src="image/${portrait}"/ alt="" aria-label="${name}"></a>        
-<h2 class="name">${name}</h2></div>
-    <template class="id">${id}</template>
+<a href="index2.html?photographId=${this.id}" id="link${
+      this.id
+    }" class="portrait"><img src="image/${this.portrait}"/ alt="" aria-label="${
+      this.name
+    }"></a>        
+<h2 class="name">${this.name}</h2></div>
+    <template class="id">${this.id}</template>
     <div aria-label="paragraph presentation">
-    <div class="city_country">${city}, ${country}</div>
-    <div class="tagline">${tagline}</div>
-    <div class="price">${price}€/jour</div>
+    <div class="city_country">${this.city}, ${this.country}</div>
+    <div class="tagline">${this.tagline}</div>
+    <div class="price">${this.price}€/jour</div>
     </div>
     <span class="container_tags" aria-label="Tag">
-      ${tags
+      ${this.tags
         .map(
           (tag) =>
             `<li><button data-tag="${tag}"  class="navbutton">#${tag}</button></li>`
@@ -100,12 +106,12 @@ const Photograph = (
     </span>                              
   </div>
     `;
-};
-
+  }
+}
 //elements qui vont se retrouver dans les éléments html
 const element = document.getElementById("list_container");
 const listItemHtmlArray = photographArray.map((photograph) => {
-  return Photograph(
+  const photographersClass = new Photograph(
     photograph.portrait,
     photograph.name,
     photograph.id,
@@ -115,6 +121,7 @@ const listItemHtmlArray = photographArray.map((photograph) => {
     photograph.price,
     photograph.tags
   );
+  return photographersClass.renderHTML();
 });
 element.innerHTML = listItemHtmlArray.join("");
 
