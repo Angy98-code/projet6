@@ -663,12 +663,6 @@ document
       messageValidation.style.display = "block";
       const form = document.getElementById("inscription");
       form.style.display = "none";
-      // console.log({
-      //   prénom: "isFirstNameValid",
-      //   nom: "isLastNameValid",
-      //   email: "isEmailValid",
-      //   message: "isMessageValid",
-      // });
     }
   });
 //
